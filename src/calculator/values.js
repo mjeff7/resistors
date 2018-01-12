@@ -3,9 +3,10 @@
 import type { SecondDigitColor, MultiplierColor } from "./colors";
 import { Colors } from "./colors";
 
-export type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type FirstDigit = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type SecondDigit = 0 | FirstDigit;
 
-export const DIGIT_VALUES_BY_COLOR: { [SecondDigitColor]: Digit } = {
+export const DIGIT_VALUES_BY_COLOR = {
   [Colors.BLACK]: 0,
   [Colors.BROWN]: 1,
   [Colors.RED]: 2,
@@ -18,7 +19,7 @@ export const DIGIT_VALUES_BY_COLOR: { [SecondDigitColor]: Digit } = {
   [Colors.WHITE]: 9
 };
 
-export type MultiplierExponent = Digit | -3 | -2 | -1;
+export type MultiplierExponent = SecondDigit | -3 | -2 | -1;
 
 export const MULTIPLIER_EXPONENT_BY_COLOR: {
   [MultiplierColor]: MultiplierExponent
