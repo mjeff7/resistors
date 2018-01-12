@@ -27,3 +27,18 @@ it("calls onChange with index when anything is selected", () => {
 
   expect(callback).toHaveBeenCalledTimes(2);
 });
+
+it("uses the passed in value if present", () => {
+  const initialValue = 2;
+
+  const options = ["a", "p", "b", "c"];
+  const component = (
+    <Select options={options} onChange={() => {}} value={initialValue} />
+  );
+  const mountedComponent = mount(component);
+
+  const actualValue = mountedComponent.find("select").props().value;
+
+  expect(actualValue).toBe(initialValue);
+  expect(pose(component)).toMatchSnapshot();
+});
