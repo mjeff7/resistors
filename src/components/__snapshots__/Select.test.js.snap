@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`includes the options given to it 1`] = `
+<select>
+  <option>
+    apple
+  </option>
+  <option>
+    peppermint
+  </option>
+  <option>
+    banana
+  </option>
+  <option>
+    cinnamon
+  </option>
+  <option>
+    cherry
+  </option>
+</select>
+`;
