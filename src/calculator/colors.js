@@ -2,118 +2,97 @@
 
 /*
  * Enumerate the colors used as bands on resistors. Colors can be imported
- * individually, e.g.
- *
- *    import { PINK } from './colors';
- *
- * or as a collection, e.g.
+ * as an object with
  *
  *    import { Colors } from './colors';
  *
  * which are objects with the color constants as keys.
  *
- * There are four collections:
- *   1. All colors.
- *   2. Colors that are valid as digits, i.e. the first two bands.
- *   3. Colors that represent the multiplier, i.e. the third band.
- *   4. Colors that represent the tolerance, i.e. the fourth band.
+ * Each band has a set of valid colors, and those are included here as types.
+ *   1. FirstDigitColor: Colors representing digits, valid on the first band.
+ *   2. SecondDigitColor: Colors representing digits, valid on the second band
+ *      (same as FirstDigitColor but includes black).
+ *   3. MultiplierColor: Colors representing multiplier exponents, valid on the
+ *      third band.
+ *   4. ToleranceColor: Colors representing the tolerance, valid on the fourth
+ *      band.
  *
  */
-
-/*
- * All colors
- */
-
-export const NONE = "none";
-export const PINK = "pink";
-export const SILVER = "silver";
-export const GOLD = "gold";
-export const BLACK = "black";
-export const BROWN = "brown";
-export const RED = "red ";
-export const ORANGE = "orange ";
-export const YELLOW = "yellow ";
-export const GREEN = "green ";
-export const BLUE = "blue ";
-export const VIOLET = "violet ";
-export const GREY = "grey ";
-export const WHITE = "white ";
-
-export const Colors = {
-  NONE,
-  PINK,
-  SILVER,
-  GOLD,
-  BLACK,
-  BROWN,
-  RED,
-  ORANGE,
-  YELLOW,
-  GREEN,
-  BLUE,
-  VIOLET,
-  GREY,
-  WHITE
-};
-
-export type Color = $Values<typeof Colors>;
-type ColorConstant = $Keys<typeof Colors>;
 
 /*
  * Colors that are valid as digits, i.e. the first two bands.
  */
 
-export const DigitColors: { [ColorConstant]: Color } = {
-  BLACK,
-  BROWN,
-  RED,
-  ORANGE,
-  YELLOW,
-  GREEN,
-  BLUE,
-  VIOLET,
-  GREY,
-  WHITE
-};
+export type FirstDigitColor =
+  | "brown"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "violet"
+  | "grey"
+  | "white";
 
-export type DigitColor = $Values<typeof DigitColors>;
+export type SecondDigitColor = "black" | FirstDigitColor;
 
 /*
  * Colors that represent the multiplier, i.e. the third band.
  */
 
-export const MultiplierColors: { [ColorConstant]: Color } = {
-  PINK,
-  SILVER,
-  GOLD,
-  BLACK,
-  BROWN,
-  RED,
-  ORANGE,
-  YELLOW,
-  GREEN,
-  BLUE,
-  VIOLET,
-  GREY,
-  WHITE
-};
-
-export type MultiplierColor = $Values<typeof MultiplierColors>;
+export type MultiplierColor =
+  | "pink"
+  | "silver"
+  | "gold"
+  | "black"
+  | "brown"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "violet"
+  | "grey"
+  | "white";
 
 /*
  * Colors that represent the tolerance, i.e. the fourth band.
  */
 
-export const ToleranceColors: { [ColorConstant]: Color } = {
-  NONE,
-  SILVER,
-  GOLD,
-  BROWN,
-  RED,
-  GREEN,
-  BLUE,
-  VIOLET,
-  GREY
-};
+export type ToleranceColor =
+  | "none"
+  | "silver"
+  | "gold"
+  | "brown"
+  | "red"
+  | "green"
+  | "blue"
+  | "violet"
+  | "grey";
 
-export type ToleranceColor = $Values<typeof ToleranceColors>;
+/*
+ * All colors
+ */
+
+export type Color =
+  | FirstDigitColor
+  | SecondDigitColor
+  | MultiplierColor
+  | ToleranceColor;
+
+export const Colors = {
+  NONE: "none",
+  PINK: "pink",
+  SILVER: "silver",
+  GOLD: "gold",
+  BLACK: "black",
+  BROWN: "brown",
+  RED: "red",
+  ORANGE: "orange",
+  YELLOW: "yellow",
+  GREEN: "green",
+  BLUE: "blue",
+  VIOLET: "violet",
+  GREY: "grey",
+  WHITE: "white"
+};
