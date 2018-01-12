@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`includes the options given to it 1`] = `
-<select>
+<select
+  onChange={[Function]}
+>
   <option>
     apple
   </option>
