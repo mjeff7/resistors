@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`includes the options given to it 1`] = `
+<select
+  onChange={[Function]}
+  value={undefined}
+>
+  <option
+    value={0}
+  >
+    apple
+  </option>
+  <option
+    value={1}
+  >
+    peppermint
+  </option>
+  <option
+    value={2}
+  >
+    banana
+  </option>
+  <option
+    value={3}
+  >
+    cinnamon
+  </option>
+  <option
+    value={4}
+  >
+    cherry
+  </option>
+</select>
+`;
+
+exports[`uses the passed in value if present 1`] = `
+<select
+  onChange={[Function]}
+  value={2}
+>
+  <option
+    value={0}
+  >
+    a
+  </option>
+  <option
+    value={1}
+  >
+    p
+  </option>
+  <option
+    value={2}
+  >
+    b
+  </option>
+  <option
+    value={3}
+  >
+    c
+  </option>
+</select>
+`;
