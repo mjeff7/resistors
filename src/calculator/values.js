@@ -27,12 +27,16 @@ export type FirstDigit = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type SecondDigit = 0 | FirstDigit;
 export type MultiplierExponent = SecondDigit | -3 | -2 | -1;
 
-export const firstDigitFromColor = (color: FirstDigitColor): FirstDigit =>
-  DIGIT_VALUES_BY_COLOR[color];
+const lookupColorDigit = <T: string>(color: T) => DIGIT_VALUES_BY_COLOR[color];
 
-export const secondDigitFromColor = (color: SecondDigitColor): SecondDigit =>
-  DIGIT_VALUES_BY_COLOR[color];
+export const firstDigitFromColor: (
+  color: FirstDigitColor
+) => FirstDigit = lookupColorDigit;
 
-export const multiplierExponentFromColor = (
+export const secondDigitFromColor: (
+  color: SecondDigitColor
+) => SecondDigit = lookupColorDigit;
+
+export const multiplierExponentFromColor: (
   color: MultiplierColor
-): MultiplierExponent => DIGIT_VALUES_BY_COLOR[color];
+) => MultiplierExponent = lookupColorDigit;
