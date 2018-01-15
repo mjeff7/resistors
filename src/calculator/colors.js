@@ -34,7 +34,23 @@ export type FirstDigitColor =
   | "grey"
   | "white";
 
+export const FIRST_DIGIT_COLORS: Array<FirstDigitColor> = [
+  "brown",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "violet",
+  "grey",
+  "white"
+];
+
 export type SecondDigitColor = "black" | FirstDigitColor;
+
+export const SECOND_DIGIT_COLORS: Array<SecondDigitColor> = ["black"].concat(
+  FIRST_DIGIT_COLORS
+);
 
 /*
  * Colors that represent the multiplier, i.e. the third band.
@@ -55,6 +71,22 @@ export type MultiplierColor =
   | "grey"
   | "white";
 
+export const MULTIPLIER_COLORS: Array<MultiplierColor> = [
+  "pink",
+  "silver",
+  "gold",
+  "black",
+  "brown",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "violet",
+  "grey",
+  "white"
+];
+
 /*
  * Colors that represent the tolerance, i.e. the fourth band.
  */
@@ -69,6 +101,18 @@ export type ToleranceColor =
   | "blue"
   | "violet"
   | "grey";
+
+export const TOLERANCE_COLORS: Array<ToleranceColor> = [
+  "none",
+  "silver",
+  "gold",
+  "brown",
+  "red",
+  "green",
+  "blue",
+  "violet",
+  "grey"
+];
 
 /*
  * All colors
