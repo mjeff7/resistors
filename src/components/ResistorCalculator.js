@@ -1,20 +1,18 @@
 // @flow
 
 import * as React from "react";
-import Select from "./Select";
+
 import {
   FIRST_DIGIT_COLORS,
-  SECOND_DIGIT_COLORS,
   MULTIPLIER_COLORS,
-  TOLERANCE_COLORS
+  SECOND_DIGIT_COLORS,
+  TOLERANCE_COLORS,
+  type FirstDigitColor,
+  type MultiplierColor,
+  type SecondDigitColor,
+  type ToleranceColor
 } from "../calculator/colors";
-
-import type {
-  FirstDigitColor,
-  SecondDigitColor,
-  MultiplierColor,
-  ToleranceColor
-} from "../calculator/colors";
+import Select from "./Select";
 
 type BandSelectorProps<T> = {
   onSelectValue: T => void,
