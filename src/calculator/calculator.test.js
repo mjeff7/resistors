@@ -4,6 +4,7 @@ import {
   attachToleranceBounds,
   calculateOhmCenterValue,
   calculateOhmValue,
+  calculateOhmValueFromColors,
   wrapOhmValueCalculator
 } from "./calculator";
 
@@ -77,5 +78,17 @@ describe("wrapOhmValueCalculator", () => {
 
     calculator("brown", "black", "red", "grey");
     expect(target).lastCalledWith(1, 0, 2, 0.0005);
+  });
+});
+
+describe("calculateOhmValueFromColors", () => {
+  it("correctly calculates resistance values from colors", () => {
+    expect(
+      calculateOhmValueFromColors("brown", "black", "red", "grey")
+    ).toMatchObject({ resistance: 1000, tolerance: 0.0005 });
+
+    expect(
+      calculateOhmValueFromColors("yellow", "white", "grey", "brown")
+    ).toMatchObject({ resistance: 4900000000, tolerance: 0.01 });
   });
 });

@@ -59,3 +59,7 @@ export const wrapOhmValueCalculator = transformArgs(
   multiplierExponentFromColor,
   toleranceValueFromColor
 );
+
+export const calculateOhmValueFromColors = wrapOhmValueCalculator(
+  calculateOhmValue
+);
