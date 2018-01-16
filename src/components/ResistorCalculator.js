@@ -1,6 +1,6 @@
 // @flow
 
-import { compose, withHandlers, withProps, withState } from "recompose";
+import { compose, withProps, withState } from "recompose";
 import * as React from "react";
 
 import {
@@ -20,13 +20,10 @@ type BandSelectorProps<T> = {
   value: T
 };
 
-const GenericBandSelector = compose(
-  withProps(({ values }) => ({ options: values })),
-  withHandlers({
-    onChange: ({ onSelectValue, values }) => colorIndex =>
-      onSelectValue(values[colorIndex])
-  })
-)(Select);
+const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
+  onChange: onSelectValue,
+  options: values
+}))(Select);
 
 type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
 
