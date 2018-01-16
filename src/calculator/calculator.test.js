@@ -2,6 +2,7 @@
 
 import {
   calculateOhmCenterValue,
+  wrapOhmValueCalculator,
   wrapOhmValueCalculatorWith
 } from "./calculator";
 
@@ -52,5 +53,15 @@ describe("wrapOhmValueCalculatorWith", () => {
     expect(bandBConverter).lastCalledWith("black");
     expect(bandCConverter).lastCalledWith("red");
     expect(bandDConverter).lastCalledWith("grey");
+  });
+});
+
+describe("wrapOhmValueCalculator", () => {
+  it("transforms with standard color values", () => {
+    const target = jest.fn();
+    const calculator = wrapOhmValueCalculator(target);
+
+    calculator("brown", "black", "red", "grey");
+    expect(target).lastCalledWith(1, 0, 2, 0.0005);
   });
 });

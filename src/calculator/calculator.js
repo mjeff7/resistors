@@ -1,11 +1,16 @@
 // @flow
 
-import type {
-  FirstDigit,
-  SecondDigit,
-  MultiplierExponent,
-  ToleranceValue
+import {
+  type FirstDigit,
+  type SecondDigit,
+  type MultiplierExponent,
+  type ToleranceValue,
+  firstDigitFromColor,
+  secondDigitFromColor,
+  multiplierExponentFromColor,
+  toleranceValueFromColor
 } from "./values";
+import { transformArgs } from "../utils";
 
 export const calculateOhmCenterValue = (
   bandA: FirstDigit,
@@ -32,3 +37,10 @@ export const wrapOhmValueCalculatorWith = <AColor, BColor, CColor, DColor>(
   d: DColor
 ) =>
   bandAConverter(a) & bandBConverter(b) & bandCConverter(c) & bandDConverter(d);
+
+export const wrapOhmValueCalculator = transformArgs(
+  firstDigitFromColor,
+  secondDigitFromColor,
+  multiplierExponentFromColor,
+  toleranceValueFromColor
+);
