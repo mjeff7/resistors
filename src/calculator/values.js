@@ -3,7 +3,8 @@
 import type {
   FirstDigitColor,
   SecondDigitColor,
-  MultiplierColor
+  MultiplierColor,
+  ToleranceColor
 } from "./colors";
 import { Colors } from "./colors";
 
@@ -23,9 +24,31 @@ const DIGIT_VALUES_BY_COLOR = {
   [Colors.WHITE]: 9
 };
 
+const TOLERANCE_VALUES_BY_COLOR = {
+  [Colors.NONE]: 0.2,
+  [Colors.SILVER]: 0.1,
+  [Colors.GOLD]: 0.05,
+  [Colors.BROWN]: 0.01,
+  [Colors.RED]: 0.02,
+  [Colors.GREEN]: 0.005,
+  [Colors.BLUE]: 0.0025,
+  [Colors.VIOLET]: 0.001,
+  [Colors.GREY]: 0.0005
+};
+
 export type FirstDigit = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type SecondDigit = 0 | FirstDigit;
 export type MultiplierExponent = SecondDigit | -3 | -2 | -1;
+export type ToleranceValue =
+  | 0.2
+  | 0.1
+  | 0.05
+  | 0.01
+  | 0.02
+  | 0.005
+  | 0.0025
+  | 0.001
+  | 0.0005;
 
 const lookupColorDigit = <T: string>(color: T) => DIGIT_VALUES_BY_COLOR[color];
 
@@ -40,3 +63,7 @@ export const secondDigitFromColor: (
 export const multiplierExponentFromColor: (
   color: MultiplierColor
 ) => MultiplierExponent = lookupColorDigit;
+
+export const toleranceValueFromColor = (
+  color: ToleranceColor
+): ToleranceValue => TOLERANCE_VALUES_BY_COLOR[color];
