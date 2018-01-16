@@ -1,6 +1,6 @@
 // @flow
 
-import { compose, defaultProps, withProps } from "recompose";
+import { compose, defaultProps, withProps, withStateHandlers } from "recompose";
 import * as React from "react";
 
 import {
@@ -93,6 +93,21 @@ export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
       return { minimum, maximum };
     })
   );
+
+export const attachStateHandlers = withStateHandlers(
+  {
+    bandAColor: "brown",
+    bandBColor: "brown",
+    bandCColor: "brown",
+    bandDColor: "brown"
+  },
+  {
+    setBandAColor: () => bandAColor => ({ bandAColor }),
+    setBandBColor: () => bandBColor => ({ bandBColor }),
+    setBandCColor: () => bandCColor => ({ bandCColor }),
+    setBandDColor: () => bandDColor => ({ bandDColor })
+  }
+);
 
 const enhancer = compose(
   defaultProps({

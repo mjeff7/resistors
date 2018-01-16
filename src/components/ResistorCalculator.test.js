@@ -4,7 +4,10 @@ import React from "react";
 
 import { mount } from "enzyme";
 
-import ResistorCalculator, { useCalculator } from "./ResistorCalculator";
+import ResistorCalculator, {
+  attachStateHandlers,
+  useCalculator
+} from "./ResistorCalculator";
 
 describe("useCalculator", () => {
   const setupTest = (a, b, c, d) => {
@@ -97,5 +100,34 @@ describe("numerical output", () => {
   it("displays the maximum somewhere", () => {
     expect(output1).toContain("650.65");
     expect(output2).toContain("10.78");
+  });
+});
+
+describe("state handlers effect color changes", () => {
+  it("responds to changing colors", () => {
+    const SimpleComponent = () => null;
+    const Wrapped = attachStateHandlers(SimpleComponent);
+
+    const component = mount(<Wrapped />);
+    const getProps = () => component.find(SimpleComponent).props();
+    const getProp = prop => getProps()[prop];
+
+    const setAndTest = (handler, band, value) => {
+      getProp(handler)(value);
+      component.update();
+      expect(getProp(band)).toBe(value);
+    };
+
+    setAndTest("setBandAColor", "bandAColor", "blue");
+    setAndTest("setBandAColor", "bandAColor", "red");
+
+    setAndTest("setBandBColor", "bandBColor", "white");
+    setAndTest("setBandBColor", "bandBColor", "green");
+
+    setAndTest("setBandCColor", "bandCColor", "pink");
+    setAndTest("setBandCColor", "bandCColor", "silver");
+
+    setAndTest("setBandDColor", "bandDColor", "violet");
+    setAndTest("setBandDColor", "bandDColor", "yellow");
   });
 });
