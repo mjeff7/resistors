@@ -6,27 +6,27 @@ exports[`includes the options given to it 1`] = `
   value={undefined}
 >
   <option
-    value={0}
+    value="apple"
   >
     apple
   </option>
   <option
-    value={1}
+    value="peppermint"
   >
     peppermint
   </option>
   <option
-    value={2}
+    value="banana"
   >
     banana
   </option>
   <option
-    value={3}
+    value="cinnamon"
   >
     cinnamon
   </option>
   <option
-    value={4}
+    value="cherry"
   >
     cherry
   </option>
@@ -36,25 +36,25 @@ exports[`includes the options given to it 1`] = `
 exports[`uses the passed in value if present 1`] = `
 <select
   onChange={[Function]}
-  value={2}
+  value="b"
 >
   <option
-    value={0}
+    value="a"
   >
     a
   </option>
   <option
-    value={1}
+    value="p"
   >
     p
   </option>
   <option
-    value={2}
+    value="b"
   >
     b
   </option>
   <option
-    value={3}
+    value="c"
   >
     c
   </option>

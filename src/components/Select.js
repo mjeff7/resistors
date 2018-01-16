@@ -2,16 +2,16 @@
 
 import React from "react";
 
-type Props = {
-  onChange: number => mixed,
-  options: Array<string | number>,
-  value?: number
+type Props<T> = {
+  onChange: T => mixed,
+  options: Array<T>,
+  +value?: T
 };
 
-export default ({ onChange, options, value }: Props) => (
+export default ({ onChange, options, value }: Props<*>) => (
   <select onChange={e => onChange(e.target.value)} value={value}>
     {options.map((option, optionIndex) => (
-      <option key={optionIndex} value={optionIndex}>
+      <option key={optionIndex} value={option}>
         {option}
       </option>
     ))}

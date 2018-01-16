@@ -14,22 +14,22 @@ it("includes the options given to it", () => {
   expect(pose(component)).toMatchSnapshot();
 });
 
-it("calls onChange with index when anything is selected", () => {
+it("calls onChange with value when anything is selected", () => {
   const options = ["a", "p", "b", "c"];
   const callback = jest.fn();
   const component = mount(<Select options={options} onChange={callback} />);
 
-  component.find("select").simulate("change", { target: { value: 2 } });
-  expect(callback).lastCalledWith(2);
+  component.find("select").simulate("change", { target: { value: "p" } });
+  expect(callback).lastCalledWith("p");
 
-  component.find("select").simulate("change", { target: { value: 1 } });
-  expect(callback).lastCalledWith(1);
+  component.find("select").simulate("change", { target: { value: "a" } });
+  expect(callback).lastCalledWith("a");
 
   expect(callback).toHaveBeenCalledTimes(2);
 });
 
 it("uses the passed in value if present", () => {
-  const initialValue = 2;
+  const initialValue = "b";
 
   const options = ["a", "p", "b", "c"];
   const component = (
