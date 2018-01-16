@@ -38,8 +38,8 @@ const FirstBandSelector = ({
 }: FirstBandSelectorProps) => (
   <GenericBandSelector
     value={value}
-    onSelectValue={onSelectValue}
     values={FIRST_DIGIT_COLORS}
+    onSelectValue={onSelectValue}
   />
 );
 
@@ -51,8 +51,8 @@ const SecondBandSelector = ({
 }: SecondBandSelectorProps) => (
   <GenericBandSelector
     value={value}
-    onSelectValue={onSelectValue}
     values={SECOND_DIGIT_COLORS}
+    onSelectValue={onSelectValue}
   />
 );
 
@@ -64,8 +64,8 @@ const MultiplierBandSelector = ({
 }: MultiplierBandSelectorProps) => (
   <GenericBandSelector
     value={value}
-    onSelectValue={onSelectValue}
     values={MULTIPLIER_COLORS}
+    onSelectValue={onSelectValue}
   />
 );
 
@@ -77,8 +77,8 @@ const ToleranceBandSelector = ({
 }: ToleranceBandSelectorProps) => (
   <GenericBandSelector
     value={value}
-    onSelectValue={onSelectValue}
     values={TOLERANCE_COLORS}
+    onSelectValue={onSelectValue}
   />
 );
 
