@@ -28,29 +28,23 @@ const GenericBandSelector = compose(
   })
 )(Select);
 
-type FirstBandSelectorProps = BandSelectorProps<FirstDigitColor>;
+type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
 
-const FirstBandSelector: React.ComponentType<
-  FirstBandSelectorProps
-> = withProps({ values: FIRST_DIGIT_COLORS })(GenericBandSelector);
+const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
+  values: FIRST_DIGIT_COLORS
+})(GenericBandSelector);
 
-type SecondBandSelectorProps = BandSelectorProps<SecondDigitColor>;
+const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
+  values: SECOND_DIGIT_COLORS
+})(GenericBandSelector);
 
-const SecondBandSelector: React.ComponentType<
-  SecondBandSelectorProps
-> = withProps({ values: SECOND_DIGIT_COLORS })(GenericBandSelector);
+const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
+  values: MULTIPLIER_COLORS
+})(GenericBandSelector);
 
-type MultiplierBandSelectorProps = BandSelectorProps<MultiplierColor>;
-
-const MultiplierBandSelector: React.ComponentType<
-  MultiplierBandSelectorProps
-> = withProps({ values: MULTIPLIER_COLORS })(GenericBandSelector);
-
-type ToleranceBandSelectorProps = BandSelectorProps<ToleranceColor>;
-
-const ToleranceBandSelector: React.ComponentType<
-  ToleranceBandSelectorProps
-> = withProps({ values: TOLERANCE_COLORS })(GenericBandSelector);
+const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
+  values: TOLERANCE_COLORS
+})(GenericBandSelector);
 
 export default () => (
   <div>
