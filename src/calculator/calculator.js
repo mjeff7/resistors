@@ -30,6 +30,13 @@ export type OhmValueCalculator = (
   ToleranceValue
 ) => CalculatedOhmValue;
 
+export type OhmValueCalculatorFromColors = (
+  FirstDigitColor,
+  SecondDigitColor,
+  MultiplierColor,
+  ToleranceColor
+) => CalculatedOhmValue;
+
 export const calculateOhmValue: OhmValueCalculator = (
   bandA,
   bandB,
