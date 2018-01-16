@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import * as React from "react";
 import {
   FIRST_DIGIT_COLORS,
   SECOND_DIGIT_COLORS,
@@ -28,14 +28,14 @@ const GenericBandSelector = <T>({
   value,
   values,
   onSelectValue
-}: GenericBandSelectorProps<T>) => <div />;
+}: GenericBandSelectorProps<T>): React.Node => <div />;
 
 type FirstBandSelectorProps = BandSelectorProps<FirstDigitColor>;
 
 const FirstBandSelector = ({
   value,
   onSelectValue
-}: FirstBandSelectorProps) => (
+}: FirstBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={FIRST_DIGIT_COLORS}
@@ -48,7 +48,7 @@ type SecondBandSelectorProps = BandSelectorProps<SecondDigitColor>;
 const SecondBandSelector = ({
   value,
   onSelectValue
-}: SecondBandSelectorProps) => (
+}: SecondBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={SECOND_DIGIT_COLORS}
@@ -61,7 +61,7 @@ type MultiplierBandSelectorProps = BandSelectorProps<MultiplierColor>;
 const MultiplierBandSelector = ({
   value,
   onSelectValue
-}: MultiplierBandSelectorProps) => (
+}: MultiplierBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={MULTIPLIER_COLORS}
@@ -74,7 +74,7 @@ type ToleranceBandSelectorProps = BandSelectorProps<ToleranceColor>;
 const ToleranceBandSelector = ({
   value,
   onSelectValue
-}: ToleranceBandSelectorProps) => (
+}: ToleranceBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={TOLERANCE_COLORS}
