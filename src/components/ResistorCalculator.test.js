@@ -1,9 +1,9 @@
 // @flow
 
 import React from "react";
+import { mount } from "enzyme";
 
 import { useCalculator } from "./ResistorCalculator";
-import { shallow } from "enzyme";
 
 describe("useCalculator", () => {
   const setupTest = (a, b, c, d) => {
@@ -14,14 +14,16 @@ describe("useCalculator", () => {
     const SimpleComponent = () => <div />;
     const WithCalculator = useCalculator(calculator)(SimpleComponent);
 
-    const props = shallow(
+    const props = mount(
       <WithCalculator
         bandAColor={a}
         bandBColor={b}
         bandCColor={c}
         bandDColor={d}
       />
-    ).props();
+    )
+      .find(SimpleComponent)
+      .props();
 
     return { props, calculator };
   };
