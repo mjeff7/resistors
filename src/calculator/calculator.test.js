@@ -1,6 +1,7 @@
 // @flow
 
 import {
+  attachToleranceBounds,
   calculateOhmCenterValue,
   calculateOhmValue,
   wrapOhmValueCalculator
@@ -43,6 +44,28 @@ describe("calculateOhmValue", () => {
     expect(calculateOhmValue(9, 5, -3, 0.1)).toMatchObject({
       resistance: 0.095,
       tolerance: 0.1
+    });
+  });
+});
+
+describe("attachToleranceBounds", () => {
+  it("correctly incorporates bounds", () => {
+    expect(
+      attachToleranceBounds({ resistance: 100, tolerance: 0.2 })
+    ).toMatchObject({
+      resistance: 100,
+      tolerance: 0.2,
+      minimum: 80,
+      maximum: 120
+    });
+
+    expect(
+      attachToleranceBounds({ resistance: 500, tolerance: 0.1 })
+    ).toMatchObject({
+      resistance: 500,
+      tolerance: 0.1,
+      minimum: 450,
+      maximum: 550
     });
   });
 });

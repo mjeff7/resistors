@@ -40,6 +40,19 @@ export const calculateOhmValue: OhmValueCalculator = (
   tolerance
 });
 
+export const attachToleranceBounds = ({
+  resistance,
+  tolerance
+}: CalculatedOhmValue): CalculatedOhmValue & {
+  minimum: number,
+  maximum: number
+} => ({
+  resistance,
+  tolerance,
+  minimum: resistance * (1 - tolerance),
+  maximum: resistance * (1 + tolerance)
+});
+
 export const wrapOhmValueCalculator = transformArgs(
   firstDigitFromColor,
   secondDigitFromColor,
