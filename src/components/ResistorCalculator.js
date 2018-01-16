@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from "react";
+import Select from "./Select";
 import {
   FIRST_DIGIT_COLORS,
   SECOND_DIGIT_COLORS,
@@ -24,11 +25,16 @@ type GenericBandSelectorProps<T> = BandSelectorProps<T> & {
   values: Array<T>
 };
 
-const GenericBandSelector = <T>({
+const GenericBandSelector = <T: string>({
   value,
   values,
   onSelectValue
-}: GenericBandSelectorProps<T>): React.Node => <div />;
+}: GenericBandSelectorProps<T>): React.Node => (
+  <Select
+    options={values}
+    onChange={colorIndex => onSelectValue(values[colorIndex])}
+  />
+);
 
 type FirstBandSelectorProps = BandSelectorProps<FirstDigitColor>;
 
