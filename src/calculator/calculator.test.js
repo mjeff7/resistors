@@ -1,7 +1,18 @@
 // @flow
 
-import { calculateOhmCenterValue } from "./calculator";
-import type { MultiplierExponent } from "./values";
+import {
+  FIRST_DIGIT_COLORS,
+  MULTIPLIER_COLORS,
+  SECOND_DIGIT_COLORS,
+  TOLERANCE_COLORS
+} from "./colors";
+import {
+  attachToleranceBounds,
+  calculateOhmCenterValue,
+  calculateOhmValue,
+  calculateOhmValueFromColors,
+  wrapOhmValueCalculator
+} from "./calculator";
 
 describe("calculateOhmCenterValue", () => {
   it("correctly translates individual digits", () => {
@@ -28,5 +39,81 @@ describe("calculateOhmCenterValue", () => {
     expect(calculateOhmCenterValue(1, 0, 7)).toBe(100000000);
     expect(calculateOhmCenterValue(1, 0, 8)).toBe(1000000000);
     expect(calculateOhmCenterValue(1, 0, 9)).toBe(10000000000);
+  });
+});
+
+describe("calculateOhmValue", () => {
+  it("correctly calculates resistances", () => {
+    expect(calculateOhmValue(1, 2, 3, 0.2)).toMatchObject({
+      resistance: 12000,
+      tolerance: 0.2
+    });
+    expect(calculateOhmValue(9, 5, -3, 0.1)).toMatchObject({
+      resistance: 0.095,
+      tolerance: 0.1
+    });
+  });
+});
+
+describe("attachToleranceBounds", () => {
+  it("correctly incorporates bounds", () => {
+    expect(
+      attachToleranceBounds({ resistance: 100, tolerance: 0.2 })
+    ).toMatchObject({
+      resistance: 100,
+      tolerance: 0.2,
+      minimum: 80,
+      maximum: 120
+    });
+
+    expect(
+      attachToleranceBounds({ resistance: 500, tolerance: 0.1 })
+    ).toMatchObject({
+      resistance: 500,
+      tolerance: 0.1,
+      minimum: 450,
+      maximum: 550
+    });
+  });
+});
+
+describe("wrapOhmValueCalculator", () => {
+  it("transforms with standard color values", () => {
+    const target = jest.fn();
+    const calculator = wrapOhmValueCalculator(target);
+
+    calculator("brown", "black", "red", "grey");
+    expect(target).lastCalledWith(1, 0, 2, 0.0005);
+  });
+});
+
+describe("calculateOhmValueFromColors", () => {
+  it("correctly calculates resistance values from colors", () => {
+    expect(
+      calculateOhmValueFromColors("brown", "black", "red", "grey")
+    ).toMatchObject({ resistance: 1000, tolerance: 0.0005 });
+
+    expect(
+      calculateOhmValueFromColors("yellow", "white", "grey", "brown")
+    ).toMatchObject({ resistance: 4900000000, tolerance: 0.01 });
+  });
+
+  it("matches the snapshot", () => {
+    FIRST_DIGIT_COLORS.forEach(firstDigitColor =>
+      SECOND_DIGIT_COLORS.forEach(secondDigitColor =>
+        MULTIPLIER_COLORS.forEach(multiplierColor =>
+          TOLERANCE_COLORS.forEach(toleranceColor =>
+            expect(
+              calculateOhmValueFromColors(
+                firstDigitColor,
+                secondDigitColor,
+                multiplierColor,
+                toleranceColor
+              )
+            ).toMatchSnapshot()
+          )
+        )
+      )
+    );
   });
 });
