@@ -1,6 +1,6 @@
 // @flow
 
-import { compose, withHandlers, withProps } from "recompose";
+import { compose, withHandlers, withProps, withState } from "recompose";
 import * as React from "react";
 
 import {
@@ -46,11 +46,20 @@ const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
   values: TOLERANCE_COLORS
 })(GenericBandSelector);
 
-export default () => (
+type DisplayProps = {
+  resistance: number
+};
+
+const DisplayComponent = ({ resistance }: DisplayProps) => (
   <div>
     <FirstBandSelector value={"brown"} onSelectValue={() => {}} />
     <SecondBandSelector value={"brown"} onSelectValue={() => {}} />
     <MultiplierBandSelector value={"brown"} onSelectValue={() => {}} />
     <ToleranceBandSelector value={"none"} onSelectValue={() => {}} />
+    <div>Resistance value: {resistance}</div>
   </div>
 );
+
+const enhancer = withState("resistance", "setResistance", 0);
+
+export default enhancer(DisplayComponent);
