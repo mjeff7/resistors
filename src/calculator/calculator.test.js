@@ -1,6 +1,12 @@
 // @flow
 
 import {
+  FIRST_DIGIT_COLORS,
+  MULTIPLIER_COLORS,
+  SECOND_DIGIT_COLORS,
+  TOLERANCE_COLORS
+} from "./colors";
+import {
   attachToleranceBounds,
   calculateOhmCenterValue,
   calculateOhmValue,
@@ -90,5 +96,24 @@ describe("calculateOhmValueFromColors", () => {
     expect(
       calculateOhmValueFromColors("yellow", "white", "grey", "brown")
     ).toMatchObject({ resistance: 4900000000, tolerance: 0.01 });
+  });
+
+  it("matches the snapshot", () => {
+    FIRST_DIGIT_COLORS.forEach(firstDigitColor =>
+      SECOND_DIGIT_COLORS.forEach(secondDigitColor =>
+        MULTIPLIER_COLORS.forEach(multiplierColor =>
+          TOLERANCE_COLORS.forEach(toleranceColor =>
+            expect(
+              calculateOhmValueFromColors(
+                firstDigitColor,
+                secondDigitColor,
+                multiplierColor,
+                toleranceColor
+              )
+            ).toMatchSnapshot()
+          )
+        )
+      )
+    );
   });
 });
