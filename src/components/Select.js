@@ -5,7 +5,7 @@ import React from "react";
 type Props<T> = {
   onChange: T => mixed,
   options: Array<T>,
-  value?: T
+  +value?: T
 };
 
 export default ({ onChange, options, value }: Props<*>) => (
