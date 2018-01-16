@@ -15,8 +15,10 @@ import {
 } from "../calculator/colors";
 import {
   type OhmValueCalculatorFromColors,
-  attachToleranceBounds
+  attachToleranceBounds,
+  calculateOhmValueFromColors
 } from "../calculator/calculator";
+import type { ToleranceValue } from "../calculator/values";
 import Select from "./Select";
 
 type BandSelectorProps<T> = {
@@ -48,16 +50,27 @@ const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
 })(GenericBandSelector);
 
 type DisplayProps = {
-  resistance: number
+  resistance: number,
+  tolerance: ToleranceValue,
+  minimum: number,
+  maximum: number
 };
 
-const DisplayComponent = ({ resistance }: DisplayProps) => (
+const DisplayComponent = ({
+  resistance,
+  tolerance,
+  minimum,
+  maximum
+}: DisplayProps) => (
   <div>
     <FirstBandSelector value={"brown"} onSelectValue={() => {}} />
     <SecondBandSelector value={"brown"} onSelectValue={() => {}} />
     <MultiplierBandSelector value={"brown"} onSelectValue={() => {}} />
     <ToleranceBandSelector value={"none"} onSelectValue={() => {}} />
     <div>Resistance value: {resistance}</div>
+    <div>Tolerance: {tolerance}</div>
+    <div>Minimum: {minimum}</div>
+    <div>Maximum: {maximum}</div>
   </div>
 );
 
@@ -88,7 +101,7 @@ const enhancer = compose(
     bandCColor: "brown",
     bandDColor: "brown"
   }),
-  useCalculator(() => ({ resistance: 0, tolerance: 0.2 }))
+  useCalculator(calculateOhmValueFromColors)
 );
 
 export default enhancer(DisplayComponent);

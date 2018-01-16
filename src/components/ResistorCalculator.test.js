@@ -1,9 +1,10 @@
 // @flow
 
 import React from "react";
+
 import { mount } from "enzyme";
 
-import { useCalculator } from "./ResistorCalculator";
+import ResistorCalculator, { useCalculator } from "./ResistorCalculator";
 
 describe("useCalculator", () => {
   const setupTest = (a, b, c, d) => {
@@ -52,5 +53,49 @@ describe("useCalculator", () => {
       minimum: 34.4,
       maximum: 51.6
     });
+  });
+});
+
+describe("numerical output", () => {
+  let output1, output2;
+
+  beforeAll(() => {
+    output1 = mount(
+      <ResistorCalculator
+        bandAColor="blue"
+        bandBColor="green"
+        bandCColor="brown"
+        bandDColor="violet"
+      />
+    ).text();
+
+    output2 = mount(
+      <ResistorCalculator
+        bandAColor="white"
+        bandBColor="grey"
+        bandCColor="gold"
+        bandDColor="silver"
+      />
+    ).text();
+  });
+
+  it("displays the resistance somewhere", () => {
+    expect(output1).toContain("650");
+    expect(output2).toContain("9.8");
+  });
+
+  it("displays the tolerance somewhere", () => {
+    expect(output1).toContain("0.001");
+    expect(output2).toContain("0.1");
+  });
+
+  it("displays the minimum somewhere", () => {
+    expect(output1).toContain("649.35");
+    expect(output2).toContain("8.82");
+  });
+
+  it("displays the maximum somewhere", () => {
+    expect(output1).toContain("650.65");
+    expect(output2).toContain("10.78");
   });
 });
