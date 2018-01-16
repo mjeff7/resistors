@@ -1,6 +1,6 @@
 // @flow
 
-import { compose, withProps, withState } from "recompose";
+import { compose, defaultProps, withProps } from "recompose";
 import * as React from "react";
 
 import {
@@ -13,6 +13,10 @@ import {
   type SecondDigitColor,
   type ToleranceColor
 } from "../calculator/colors";
+import {
+  type OhmValueCalculatorFromColors,
+  attachToleranceBounds
+} from "../calculator/calculator";
 import Select from "./Select";
 
 type BandSelectorProps<T> = {
@@ -57,6 +61,25 @@ const DisplayComponent = ({ resistance }: DisplayProps) => (
   </div>
 );
 
-const enhancer = withState("resistance", "setResistance", 0);
+export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
+  withProps(({ bandAColor, bandBColor, bandCColor, bandDColor }) => {
+    // Explicitly destructure and return these properties so that Flow sees
+    // that they are present as component properties.
+    const { resistance, tolerance, minimum, maximum } = attachToleranceBounds(
+      calculator(bandAColor, bandBColor, bandCColor, bandDColor)
+    );
+
+    return { resistance, tolerance, minimum, maximum };
+  });
+
+const enhancer = compose(
+  defaultProps({
+    bandAColor: "brown",
+    bandBColor: "brown",
+    bandCColor: "brown",
+    bandDColor: "brown"
+  }),
+  useCalculator(() => ({ resistance: 0, tolerance: 0.2 }))
+);
 
 export default enhancer(DisplayComponent);

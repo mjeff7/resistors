@@ -10,6 +10,12 @@ import {
   multiplierExponentFromColor,
   toleranceValueFromColor
 } from "./values";
+import type {
+  FirstDigitColor,
+  MultiplierColor,
+  SecondDigitColor,
+  ToleranceColor
+} from "./colors";
 import { transformArgs } from "../utils";
 
 export const calculateOhmCenterValue = (
