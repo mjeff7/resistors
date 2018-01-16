@@ -25,7 +25,7 @@ type GenericBandSelectorProps<T> = BandSelectorProps<T> & {
   values: Array<T>
 };
 
-const GenericBandSelector = <T: string>({
+const GenericBandSelector: React.ComponentType<*> = <T: string>({
   value,
   values,
   onSelectValue
@@ -38,7 +38,7 @@ const GenericBandSelector = <T: string>({
 
 type FirstBandSelectorProps = BandSelectorProps<FirstDigitColor>;
 
-const FirstBandSelector = ({
+const FirstBandSelector: React.ComponentType<FirstBandSelectorProps> = ({
   value,
   onSelectValue
 }: FirstBandSelectorProps): React.Node => (
@@ -51,7 +51,7 @@ const FirstBandSelector = ({
 
 type SecondBandSelectorProps = BandSelectorProps<SecondDigitColor>;
 
-const SecondBandSelector = ({
+const SecondBandSelector: React.ComponentType<SecondBandSelectorProps> = ({
   value,
   onSelectValue
 }: SecondBandSelectorProps): React.Node => (
@@ -64,10 +64,9 @@ const SecondBandSelector = ({
 
 type MultiplierBandSelectorProps = BandSelectorProps<MultiplierColor>;
 
-const MultiplierBandSelector = ({
-  value,
-  onSelectValue
-}: MultiplierBandSelectorProps): React.Node => (
+const MultiplierBandSelector: React.ComponentType<
+  MultiplierBandSelectorProps
+> = ({ value, onSelectValue }: MultiplierBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={MULTIPLIER_COLORS}
@@ -77,10 +76,9 @@ const MultiplierBandSelector = ({
 
 type ToleranceBandSelectorProps = BandSelectorProps<ToleranceColor>;
 
-const ToleranceBandSelector = ({
-  value,
-  onSelectValue
-}: ToleranceBandSelectorProps): React.Node => (
+const ToleranceBandSelector: React.ComponentType<
+  ToleranceBandSelectorProps
+> = ({ value, onSelectValue }: ToleranceBandSelectorProps): React.Node => (
   <GenericBandSelector
     value={value}
     values={TOLERANCE_COLORS}
