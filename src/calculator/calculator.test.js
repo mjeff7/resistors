@@ -1,7 +1,9 @@
 // @flow
 
-import { calculateOhmCenterValue } from "./calculator";
-import type { MultiplierExponent } from "./values";
+import {
+  calculateOhmCenterValue,
+  wrapOhmValueCalculatorWith
+} from "./calculator";
 
 describe("calculateOhmCenterValue", () => {
   it("correctly translates individual digits", () => {
@@ -28,5 +30,27 @@ describe("calculateOhmCenterValue", () => {
     expect(calculateOhmCenterValue(1, 0, 7)).toBe(100000000);
     expect(calculateOhmCenterValue(1, 0, 8)).toBe(1000000000);
     expect(calculateOhmCenterValue(1, 0, 9)).toBe(10000000000);
+  });
+});
+
+describe("wrapOhmValueCalculatorWith", () => {
+  it("calls the band converters", () => {
+    const bandAConverter = jest.fn();
+    const bandBConverter = jest.fn();
+    const bandCConverter = jest.fn();
+    const bandDConverter = jest.fn();
+    const wrapped = jest.fn();
+    const wrapper = wrapOhmValueCalculatorWith(
+      bandAConverter,
+      bandBConverter,
+      bandCConverter,
+      bandDConverter
+    )(wrapped);
+
+    wrapper("brown", "black", "red", "grey");
+    expect(bandAConverter).lastCalledWith("brown");
+    expect(bandBConverter).lastCalledWith("black");
+    expect(bandCConverter).lastCalledWith("red");
+    expect(bandDConverter).lastCalledWith("grey");
   });
 });
