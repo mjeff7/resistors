@@ -1,6 +1,10 @@
 // @flow
 
-import { calculateOhmCenterValue, wrapOhmValueCalculator } from "./calculator";
+import {
+  calculateOhmCenterValue,
+  calculateOhmValue,
+  wrapOhmValueCalculator
+} from "./calculator";
 
 describe("calculateOhmCenterValue", () => {
   it("correctly translates individual digits", () => {
@@ -27,6 +31,19 @@ describe("calculateOhmCenterValue", () => {
     expect(calculateOhmCenterValue(1, 0, 7)).toBe(100000000);
     expect(calculateOhmCenterValue(1, 0, 8)).toBe(1000000000);
     expect(calculateOhmCenterValue(1, 0, 9)).toBe(10000000000);
+  });
+});
+
+describe("calculateOhmValue", () => {
+  it("correctly calculates resistances", () => {
+    expect(calculateOhmValue(1, 2, 3, 0.2)).toMatchObject({
+      resistance: 12000,
+      tolerance: 0.2
+    });
+    expect(calculateOhmValue(9, 5, -3, 0.1)).toMatchObject({
+      resistance: 0.095,
+      tolerance: 0.1
+    });
   });
 });
 

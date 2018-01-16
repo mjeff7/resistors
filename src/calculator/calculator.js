@@ -18,12 +18,27 @@ export const calculateOhmCenterValue = (
   multiplierExponent: MultiplierExponent
 ) => (bandA * 10 + bandB) * Math.pow(10, multiplierExponent);
 
+type CalculatedOhmValue = {
+  resistance: number,
+  tolerance: ToleranceValue
+};
+
 type OhmValueCalculator = (
   FirstDigit,
   SecondDigit,
   MultiplierExponent,
   ToleranceValue
-) => number;
+) => CalculatedOhmValue;
+
+export const calculateOhmValue: OhmValueCalculator = (
+  bandA,
+  bandB,
+  multiplierExponent,
+  tolerance
+) => ({
+  resistance: calculateOhmCenterValue(bandA, bandB, multiplierExponent),
+  tolerance
+});
 
 export const wrapOhmValueCalculator = transformArgs(
   firstDigitFromColor,
