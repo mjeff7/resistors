@@ -1,5 +1,6 @@
 // @flow
 
+import { withProps } from "recompose";
 import * as React from "react";
 
 import {
@@ -23,7 +24,7 @@ type GenericBandSelectorProps<T> = BandSelectorProps<T> & {
   values: Array<T>
 };
 
-const GenericBandSelector: React.ComponentType<*> = <T: string>({
+const GenericBandSelector = <T: string>({
   value,
   values,
   onSelectValue
@@ -36,53 +37,27 @@ const GenericBandSelector: React.ComponentType<*> = <T: string>({
 
 type FirstBandSelectorProps = BandSelectorProps<FirstDigitColor>;
 
-const FirstBandSelector: React.ComponentType<FirstBandSelectorProps> = ({
-  value,
-  onSelectValue
-}: FirstBandSelectorProps): React.Node => (
-  <GenericBandSelector
-    value={value}
-    values={FIRST_DIGIT_COLORS}
-    onSelectValue={onSelectValue}
-  />
-);
+const FirstBandSelector: React.ComponentType<
+  FirstBandSelectorProps
+> = withProps({ values: FIRST_DIGIT_COLORS })(GenericBandSelector);
 
 type SecondBandSelectorProps = BandSelectorProps<SecondDigitColor>;
 
-const SecondBandSelector: React.ComponentType<SecondBandSelectorProps> = ({
-  value,
-  onSelectValue
-}: SecondBandSelectorProps): React.Node => (
-  <GenericBandSelector
-    value={value}
-    values={SECOND_DIGIT_COLORS}
-    onSelectValue={onSelectValue}
-  />
-);
+const SecondBandSelector: React.ComponentType<
+  SecondBandSelectorProps
+> = withProps({ values: SECOND_DIGIT_COLORS })(GenericBandSelector);
 
 type MultiplierBandSelectorProps = BandSelectorProps<MultiplierColor>;
 
 const MultiplierBandSelector: React.ComponentType<
   MultiplierBandSelectorProps
-> = ({ value, onSelectValue }: MultiplierBandSelectorProps): React.Node => (
-  <GenericBandSelector
-    value={value}
-    values={MULTIPLIER_COLORS}
-    onSelectValue={onSelectValue}
-  />
-);
+> = withProps({ values: MULTIPLIER_COLORS })(GenericBandSelector);
 
 type ToleranceBandSelectorProps = BandSelectorProps<ToleranceColor>;
 
 const ToleranceBandSelector: React.ComponentType<
   ToleranceBandSelectorProps
-> = ({ value, onSelectValue }: ToleranceBandSelectorProps): React.Node => (
-  <GenericBandSelector
-    value={value}
-    values={TOLERANCE_COLORS}
-    onSelectValue={onSelectValue}
-  />
-);
+> = withProps({ values: TOLERANCE_COLORS })(GenericBandSelector);
 
 export default () => (
   <div>
