@@ -33,19 +33,19 @@ const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
 
 type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
 
-const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
+export const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
   values: FIRST_DIGIT_COLORS
 })(GenericBandSelector);
 
-const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
+export const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
   values: SECOND_DIGIT_COLORS
 })(GenericBandSelector);
 
-const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
+export const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
   values: MULTIPLIER_COLORS
 })(GenericBandSelector);
 
-const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
+export const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
   values: TOLERANCE_COLORS
 })(GenericBandSelector);
 
@@ -53,20 +53,28 @@ type DisplayProps = {
   resistance: number,
   tolerance: ToleranceValue,
   minimum: number,
-  maximum: number
+  maximum: number,
+  setBandAColor: (*) => *,
+  setBandBColor: (*) => *,
+  setBandCColor: (*) => *,
+  setBandDColor: (*) => *
 };
 
-const DisplayComponent = ({
+export const DisplayComponent = ({
   resistance,
   tolerance,
   minimum,
-  maximum
+  maximum,
+  setBandAColor,
+  setBandBColor,
+  setBandCColor,
+  setBandDColor
 }: DisplayProps) => (
   <div>
-    <FirstBandSelector value={"brown"} onSelectValue={() => {}} />
-    <SecondBandSelector value={"brown"} onSelectValue={() => {}} />
-    <MultiplierBandSelector value={"brown"} onSelectValue={() => {}} />
-    <ToleranceBandSelector value={"none"} onSelectValue={() => {}} />
+    <FirstBandSelector value={"brown"} onSelectValue={setBandAColor} />
+    <SecondBandSelector value={"brown"} onSelectValue={setBandBColor} />
+    <MultiplierBandSelector value={"brown"} onSelectValue={setBandCColor} />
+    <ToleranceBandSelector value={"none"} onSelectValue={setBandDColor} />
     <div>Resistance value: {resistance}</div>
     <div>Tolerance: {tolerance}</div>
     <div>Minimum: {minimum}</div>
@@ -111,6 +119,7 @@ const enhancer = compose(
     bandCColor: "brown",
     bandDColor: "brown"
   }),
+  attachStateHandlers,
   useCalculator(calculateOhmValueFromColors)
 );
 

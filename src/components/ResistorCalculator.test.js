@@ -5,6 +5,11 @@ import React from "react";
 import { mount } from "enzyme";
 
 import ResistorCalculator, {
+  DisplayComponent,
+  FirstBandSelector,
+  MultiplierBandSelector,
+  SecondBandSelector,
+  ToleranceBandSelector,
   attachStateHandlers,
   useCalculator
 } from "./ResistorCalculator";
@@ -129,5 +134,34 @@ describe("state handlers effect color changes", () => {
 
     setAndTest("setBandDColor", "bandDColor", "violet");
     setAndTest("setBandDColor", "bandDColor", "yellow");
+  });
+});
+
+describe("component interactivity", () => {
+  it("responds to menu selections", () => {
+    const component = mount(<ResistorCalculator />);
+    const getProps = () => component.find(DisplayComponent).props();
+    const getProp = prop => getProps()[prop];
+
+    const setAndTest = (Component, band, value) => {
+      component
+        .find(Component)
+        .find("select")
+        .simulate("change", { target: { value } });
+      component.update();
+      expect(getProp(band)).toBe(value);
+    };
+
+    setAndTest(FirstBandSelector, "bandAColor", "blue");
+    setAndTest(FirstBandSelector, "bandAColor", "white");
+
+    setAndTest(SecondBandSelector, "bandBColor", "red");
+    setAndTest(SecondBandSelector, "bandBColor", "green");
+
+    setAndTest(MultiplierBandSelector, "bandCColor", "pink");
+    setAndTest(MultiplierBandSelector, "bandCColor", "yellow");
+
+    setAndTest(ToleranceBandSelector, "bandDColor", "violet");
+    setAndTest(ToleranceBandSelector, "bandDColor", "silver");
   });
 });
