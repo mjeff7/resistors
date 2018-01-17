@@ -92,18 +92,30 @@ export const DisplayComponent = ({
 
 export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
   compose(
-    withProps(({ bandAColor, bandBColor, bandCColor, bandDColor }) => {
-      // Explicitly destructure and return these properties so that Flow sees
-      // that they are present as component properties.
-      const { resistance, tolerance } = calculator(
+    withProps(
+      ({
         bandAColor,
         bandBColor,
         bandCColor,
         bandDColor
-      );
+      }: {
+        bandAColor: FirstDigitColor,
+        bandBColor: SecondDigitColor,
+        bandCColor: MultiplierColor,
+        bandDColor: ToleranceColor
+      }) => {
+        // Explicitly destructure and return these properties so that Flow sees
+        // that they are present as component properties.
+        const { resistance, tolerance } = calculator(
+          bandAColor,
+          bandBColor,
+          bandCColor,
+          bandDColor
+        );
 
-      return { resistance, tolerance };
-    }),
+        return { resistance, tolerance };
+      }
+    ),
     withProps((props: { resistance: number, tolerance: ToleranceValue }) => {
       const { minimum, maximum } = attachToleranceBounds(props);
       return { minimum, maximum };
