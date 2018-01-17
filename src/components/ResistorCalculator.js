@@ -95,12 +95,7 @@ export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
   );
 
 export const attachStateHandlers = withStateHandlers(
-  {
-    bandAColor: "brown",
-    bandBColor: "brown",
-    bandCColor: "brown",
-    bandDColor: "brown"
-  },
+  {},
   {
     setBandAColor: () => bandAColor => ({ bandAColor }),
     setBandBColor: () => bandBColor => ({ bandBColor }),
