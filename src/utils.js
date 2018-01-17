@@ -1,4 +1,6 @@
-export const transformArgs = (...transformers) => toTransform => (...args) => {
+export const transformArgs = (...transformers: Array<(*) => *>) => (
+  toTransform: (*) => *
+) => (...args) => {
   const transformedArgs = transformers.map((transformer, argumentIndex) =>
     transformer(args[argumentIndex])
   );
