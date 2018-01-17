@@ -104,7 +104,7 @@ export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
 
       return { resistance, tolerance };
     }),
-    withProps(props => {
+    withProps((props: { resistance: number, tolerance: ToleranceValue }) => {
       const { minimum, maximum } = attachToleranceBounds(props);
       return { minimum, maximum };
     })
