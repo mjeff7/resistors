@@ -122,14 +122,19 @@ export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
     })
   );
 
-export const attachStateHandlers = withStateHandlers(
-  {},
-  {
-    setBandAColor: () => bandAColor => ({ bandAColor }),
-    setBandBColor: () => bandBColor => ({ bandBColor }),
-    setBandCColor: () => bandCColor => ({ bandCColor }),
-    setBandDColor: () => bandDColor => ({ bandDColor })
-  }
+export const attachStateHandlers = compose(
+  withStateHandlers(({ bandAColor }) => ({ bandAColor }), {
+    setBandAColor: () => (bandAColor: FirstDigitColor) => ({ bandAColor })
+  }),
+  withStateHandlers(({ bandBColor }) => ({ bandBColor }), {
+    setBandBColor: () => (bandBColor: SecondDigitColor) => ({ bandBColor })
+  }),
+  withStateHandlers(({ bandCColor }) => ({ bandCColor }), {
+    setBandCColor: () => (bandCColor: MultiplierColor) => ({ bandCColor })
+  }),
+  withStateHandlers(({ bandDColor }) => ({ bandDColor }), {
+    setBandDColor: () => (bandDColor: ToleranceColor) => ({ bandDColor })
+  })
 );
 
 const enhancer = compose(
