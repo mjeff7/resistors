@@ -139,10 +139,10 @@ export const attachStateHandlers = compose(
 
 const enhancer = compose(
   defaultProps({
-    bandAColor: "brown",
-    bandBColor: "brown",
-    bandCColor: "brown",
-    bandDColor: "brown"
+    bandAColor: FIRST_DIGIT_COLORS[0],
+    bandBColor: SECOND_DIGIT_COLORS[0],
+    bandCColor: MULTIPLIER_COLORS[0],
+    bandDColor: TOLERANCE_COLORS[0]
   }),
   attachStateHandlers,
   useCalculator(calculateOhmValueFromColors)
