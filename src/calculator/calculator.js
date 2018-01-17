@@ -10,6 +10,12 @@ import {
   multiplierExponentFromColor,
   toleranceValueFromColor
 } from "./values";
+import type {
+  FirstDigitColor,
+  MultiplierColor,
+  SecondDigitColor,
+  ToleranceColor
+} from "./colors";
 import { transformArgs } from "../utils";
 
 export const calculateOhmCenterValue = (
@@ -18,16 +24,23 @@ export const calculateOhmCenterValue = (
   multiplierExponent: MultiplierExponent
 ) => (bandA * 10 + bandB) * Math.pow(10, multiplierExponent);
 
-type CalculatedOhmValue = {
+export type CalculatedOhmValue = {
   resistance: number,
   tolerance: ToleranceValue
 };
 
-type OhmValueCalculator = (
+export type OhmValueCalculator = (
   FirstDigit,
   SecondDigit,
   MultiplierExponent,
   ToleranceValue
+) => CalculatedOhmValue;
+
+export type OhmValueCalculatorFromColors = (
+  FirstDigitColor,
+  SecondDigitColor,
+  MultiplierColor,
+  ToleranceColor
 ) => CalculatedOhmValue;
 
 export const calculateOhmValue: OhmValueCalculator = (
@@ -60,6 +73,9 @@ export const wrapOhmValueCalculator = transformArgs(
   toleranceValueFromColor
 );
 
-export const calculateOhmValueFromColors = wrapOhmValueCalculator(
-  calculateOhmValue
-);
+export const calculateOhmValueFromColors: (
+  FirstDigitColor,
+  SecondDigitColor,
+  MultiplierColor,
+  ToleranceColor
+) => CalculatedOhmValue = wrapOhmValueCalculator(calculateOhmValue);

@@ -1,6 +1,6 @@
 // @flow
 
-import { compose, withProps, withState } from "recompose";
+import { compose, defaultProps, withProps, withStateHandlers } from "recompose";
 import * as React from "react";
 
 import {
@@ -13,6 +13,12 @@ import {
   type SecondDigitColor,
   type ToleranceColor
 } from "../calculator/colors";
+import {
+  type OhmValueCalculatorFromColors,
+  attachToleranceBounds,
+  calculateOhmValueFromColors
+} from "../calculator/calculator";
+import type { ToleranceValue } from "../calculator/values";
 import Select from "./Select";
 
 type BandSelectorProps<T> = {
@@ -27,36 +33,119 @@ const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
 
 type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
 
-const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
+export const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
   values: FIRST_DIGIT_COLORS
 })(GenericBandSelector);
 
-const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
+export const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
   values: SECOND_DIGIT_COLORS
 })(GenericBandSelector);
 
-const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
+export const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
   values: MULTIPLIER_COLORS
 })(GenericBandSelector);
 
-const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
+export const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
   values: TOLERANCE_COLORS
 })(GenericBandSelector);
 
 type DisplayProps = {
-  resistance: number
+  resistance: number,
+  tolerance: ToleranceValue,
+  minimum: number,
+  maximum: number,
+  bandAColor: FirstDigitColor,
+  bandBColor: SecondDigitColor,
+  bandCColor: MultiplierColor,
+  bandDColor: ToleranceColor,
+  setBandAColor: (*) => *,
+  setBandBColor: (*) => *,
+  setBandCColor: (*) => *,
+  setBandDColor: (*) => *
 };
 
-const DisplayComponent = ({ resistance }: DisplayProps) => (
+export const DisplayComponent = ({
+  resistance,
+  tolerance,
+  minimum,
+  maximum,
+  bandAColor,
+  bandBColor,
+  bandCColor,
+  bandDColor,
+  setBandAColor,
+  setBandBColor,
+  setBandCColor,
+  setBandDColor
+}: DisplayProps) => (
   <div>
-    <FirstBandSelector value={"brown"} onSelectValue={() => {}} />
-    <SecondBandSelector value={"brown"} onSelectValue={() => {}} />
-    <MultiplierBandSelector value={"brown"} onSelectValue={() => {}} />
-    <ToleranceBandSelector value={"none"} onSelectValue={() => {}} />
+    <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
+    <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
+    <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
+    <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
     <div>Resistance value: {resistance}</div>
+    <div>Tolerance: {tolerance}</div>
+    <div>Minimum: {minimum}</div>
+    <div>Maximum: {maximum}</div>
   </div>
 );
 
-const enhancer = withState("resistance", "setResistance", 0);
+export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
+  compose(
+    withProps(
+      ({
+        bandAColor,
+        bandBColor,
+        bandCColor,
+        bandDColor
+      }: {
+        bandAColor: FirstDigitColor,
+        bandBColor: SecondDigitColor,
+        bandCColor: MultiplierColor,
+        bandDColor: ToleranceColor
+      }) => {
+        // Explicitly destructure and return these properties so that Flow sees
+        // that they are present as component properties.
+        const { resistance, tolerance } = calculator(
+          bandAColor,
+          bandBColor,
+          bandCColor,
+          bandDColor
+        );
+
+        return { resistance, tolerance };
+      }
+    ),
+    withProps((props: { resistance: number, tolerance: ToleranceValue }) => {
+      const { minimum, maximum } = attachToleranceBounds(props);
+      return { minimum, maximum };
+    })
+  );
+
+export const attachStateHandlers = compose(
+  withStateHandlers(({ bandAColor }) => ({ bandAColor }), {
+    setBandAColor: () => (bandAColor: FirstDigitColor) => ({ bandAColor })
+  }),
+  withStateHandlers(({ bandBColor }) => ({ bandBColor }), {
+    setBandBColor: () => (bandBColor: SecondDigitColor) => ({ bandBColor })
+  }),
+  withStateHandlers(({ bandCColor }) => ({ bandCColor }), {
+    setBandCColor: () => (bandCColor: MultiplierColor) => ({ bandCColor })
+  }),
+  withStateHandlers(({ bandDColor }) => ({ bandDColor }), {
+    setBandDColor: () => (bandDColor: ToleranceColor) => ({ bandDColor })
+  })
+);
+
+const enhancer = compose(
+  defaultProps({
+    bandAColor: FIRST_DIGIT_COLORS[0],
+    bandBColor: SECOND_DIGIT_COLORS[0],
+    bandCColor: MULTIPLIER_COLORS[0],
+    bandDColor: TOLERANCE_COLORS[0]
+  }),
+  attachStateHandlers,
+  useCalculator(calculateOhmValueFromColors)
+);
 
 export default enhancer(DisplayComponent);
