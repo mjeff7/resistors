@@ -54,6 +54,10 @@ type DisplayProps = {
   tolerance: ToleranceValue,
   minimum: number,
   maximum: number,
+  bandAColor: FirstDigitColor,
+  bandBColor: SecondDigitColor,
+  bandCColor: MultiplierColor,
+  bandDColor: ToleranceColor,
   setBandAColor: (*) => *,
   setBandBColor: (*) => *,
   setBandCColor: (*) => *,
@@ -65,16 +69,20 @@ export const DisplayComponent = ({
   tolerance,
   minimum,
   maximum,
+  bandAColor,
+  bandBColor,
+  bandCColor,
+  bandDColor,
   setBandAColor,
   setBandBColor,
   setBandCColor,
   setBandDColor
 }: DisplayProps) => (
   <div>
-    <FirstBandSelector value={"brown"} onSelectValue={setBandAColor} />
-    <SecondBandSelector value={"brown"} onSelectValue={setBandBColor} />
-    <MultiplierBandSelector value={"brown"} onSelectValue={setBandCColor} />
-    <ToleranceBandSelector value={"none"} onSelectValue={setBandDColor} />
+    <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
+    <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
+    <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
+    <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
     <div>Resistance value: {resistance}</div>
     <div>Tolerance: {tolerance}</div>
     <div>Minimum: {minimum}</div>

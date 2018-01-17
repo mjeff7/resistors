@@ -164,4 +164,35 @@ describe("component interactivity", () => {
     setAndTest(ToleranceBandSelector, "bandDColor", "violet");
     setAndTest(ToleranceBandSelector, "bandDColor", "silver");
   });
+
+  describe("displays current value as menu selection", () => {
+    const setAndTest = (Component, band, value) => {
+      expect(
+        mount(<ResistorCalculator {...{ [band]: value }} />)
+          .find(Component)
+          .find("select")
+          .props().value
+      ).toBe(value);
+    };
+
+    it("first selector", () => {
+      setAndTest(FirstBandSelector, "bandAColor", "blue");
+      setAndTest(FirstBandSelector, "bandAColor", "white");
+    });
+
+    it("second selector", () => {
+      setAndTest(SecondBandSelector, "bandBColor", "red");
+      setAndTest(SecondBandSelector, "bandBColor", "green");
+    });
+
+    it("third selector", () => {
+      setAndTest(MultiplierBandSelector, "bandCColor", "pink");
+      setAndTest(MultiplierBandSelector, "bandCColor", "yellow");
+    });
+
+    it("fourth selector", () => {
+      setAndTest(ToleranceBandSelector, "bandDColor", "violet");
+      setAndTest(ToleranceBandSelector, "bandDColor", "silver");
+    });
+  });
 });
