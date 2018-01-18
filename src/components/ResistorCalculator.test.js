@@ -4,12 +4,14 @@ import React from "react";
 
 import { mount } from "enzyme";
 
-import ResistorCalculator, {
-  DisplayComponent,
+import {
   FirstBandSelector,
   MultiplierBandSelector,
   SecondBandSelector,
-  ToleranceBandSelector,
+  ToleranceBandSelector
+} from "./bandSelectors";
+import ResistorCalculator, {
+  DisplayComponent,
   attachStateHandlers,
   useCalculator
 } from "./ResistorCalculator";

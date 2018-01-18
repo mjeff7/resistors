@@ -14,41 +14,18 @@ import {
   type ToleranceColor
 } from "../calculator/colors";
 import {
+  FirstBandSelector,
+  MultiplierBandSelector,
+  SecondBandSelector,
+  ToleranceBandSelector
+} from "./bandSelectors";
+import {
   type OhmValueCalculatorFromColors,
   attachToleranceBounds,
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
 import ResistorImage from "./ResistorImage";
-import Select from "./Select";
-
-type BandSelectorProps<T> = {
-  onSelectValue: T => void,
-  value: T
-};
-
-const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
-  onChange: onSelectValue,
-  options: values
-}))(Select);
-
-type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
-
-export const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
-  values: FIRST_DIGIT_COLORS
-})(GenericBandSelector);
-
-export const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
-  values: SECOND_DIGIT_COLORS
-})(GenericBandSelector);
-
-export const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
-  values: MULTIPLIER_COLORS
-})(GenericBandSelector);
-
-export const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
-  values: TOLERANCE_COLORS
-})(GenericBandSelector);
 
 export type BandColors = {
   bandAColor: FirstDigitColor,
