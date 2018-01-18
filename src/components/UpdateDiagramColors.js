@@ -28,8 +28,6 @@ const pollWhileFalsy = f =>
     attempt();
   });
 
-const chainPollWhileFalsy = f => x => pollWhileFalsy(() => f(x));
-
 export default class extends React.Component<Props & *, *> {
   contentDocument: ?Document;
 
