@@ -9,6 +9,9 @@
   justify-content: flex-start;
 }
 
+.selectors > * {
+}
+
 object {
   height: 100%;
 }

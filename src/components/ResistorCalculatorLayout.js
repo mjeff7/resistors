@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import * as React from "react";
 
 import type { BandColors } from "./ResistorCalculator";
 import {
@@ -9,9 +9,25 @@ import {
   SecondBandSelector,
   ToleranceBandSelector
 } from "./bandSelectors";
+import { interleave } from "../utils";
 import ResistorImage from "./ResistorImage";
 
 import "./ResistorCalculatorLayout.css";
+
+type SpacerProps = {
+  children: Array<React.Node>,
+  spacing: Array<number>
+};
+
+const Spacer = ({ children, spacing = [], ...remainingProps }: SpacerProps) => {
+  const spacers = spacing.map((spacerSize, spacerIndex) => (
+    <div key={spacerIndex} style={{ flexGrow: spacerSize }} />
+  ));
+
+  const newChildren = interleave(spacers, children);
+
+  return <div {...remainingProps}>{newChildren}</div>;
+};
 
 type Props = BandColors & {
   resistance: string,
@@ -41,7 +57,7 @@ export default ({
   <div>
     <div className="imageAndSelectors">
       <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-      <div className="selectors">
+      <Spacer className="selectors" spacing={[]}>
         <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
         <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
         <MultiplierBandSelector
@@ -52,7 +68,7 @@ export default ({
           value={bandDColor}
           onSelectValue={setBandDColor}
         />
-      </div>
+      </Spacer>
     </div>
     <div>
       Resistance value: {resistance} {tolerance}
