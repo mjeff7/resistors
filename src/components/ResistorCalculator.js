@@ -65,21 +65,28 @@ export const attachStateHandlers = compose(
   })
 );
 
-export const formatResistanceValue = (value: number) => {
+export const formatResistanceValue = (value: number, sigFigs: ?number) => {
   const [smallValue, suffix] = abbreviateValue(value);
 
-  return `${smallValue} ${suffix}Ω`;
+  return `${sigFigs ? smallValue.toPrecision(sigFigs) : smallValue} ${suffix}Ω`;
 };
 
 export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;
 
+const getSigFigsForRangeBounds = (tolerance: ToleranceValue) =>
+  2 - Math.floor(Math.log10(tolerance));
+
 const formatValuesForDisplay = withProps(
-  ({ resistance, minimum, maximum, tolerance }) => ({
-    resistance: formatResistanceValue(resistance),
-    minimum: formatResistanceValue(minimum),
-    maximum: formatResistanceValue(maximum),
-    tolerance: formatTolerance(tolerance)
-  })
+  ({ resistance, minimum, maximum, tolerance }) => {
+    const boundsSigFigs = getSigFigsForRangeBounds(tolerance);
+
+    return {
+      resistance: formatResistanceValue(resistance),
+      minimum: formatResistanceValue(minimum, boundsSigFigs),
+      maximum: formatResistanceValue(maximum, boundsSigFigs),
+      tolerance: formatTolerance(tolerance)
+    };
+  }
 );
 
 const enhancer = compose(

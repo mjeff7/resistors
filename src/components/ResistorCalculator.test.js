@@ -110,7 +110,7 @@ describe("numerical output", () => {
 
   it("displays the maximum somewhere", () => {
     expect(output1).toContain("650.65 Ω");
-    expect(output2).toContain("10.780000000000001 Ω");
+    expect(output2).toContain("10.8 Ω");
   });
 });
 
