@@ -34,7 +34,7 @@ export type BandColors = {
   bandDColor: ToleranceColor
 };
 
-type DisplayProps = BandColors & {
+type ResistorCalculatorLayoutProps = BandColors & {
   resistance: number,
   tolerance: ToleranceValue,
   minimum: number,
@@ -45,7 +45,7 @@ type DisplayProps = BandColors & {
   setBandDColor: (*) => *
 };
 
-export const DisplayComponent = ({
+export const ResistorCalculatorLayout = ({
   resistance,
   tolerance,
   minimum,
@@ -58,7 +58,7 @@ export const DisplayComponent = ({
   setBandBColor,
   setBandCColor,
   setBandDColor
-}: DisplayProps) => (
+}: ResistorCalculatorLayoutProps) => (
   <div>
     <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
     <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
@@ -120,4 +120,4 @@ const enhancer = compose(
   useCalculator(calculateOhmValueFromColors)
 );
 
-export default enhancer(DisplayComponent);
+export default enhancer(ResistorCalculatorLayout);

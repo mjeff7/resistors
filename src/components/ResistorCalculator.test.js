@@ -11,7 +11,7 @@ import {
   ToleranceBandSelector
 } from "./bandSelectors";
 import ResistorCalculator, {
-  DisplayComponent,
+  ResistorCalculatorLayout,
   attachStateHandlers,
   useCalculator
 } from "./ResistorCalculator";
@@ -142,7 +142,7 @@ describe("state handlers effect color changes", () => {
 describe("component interactivity", () => {
   it("responds to menu selections", () => {
     const component = mount(<ResistorCalculator />);
-    const getProps = () => component.find(DisplayComponent).props();
+    const getProps = () => component.find(ResistorCalculatorLayout).props();
     const getProp = prop => getProps()[prop];
 
     const setAndTest = (Component, band, value) => {
