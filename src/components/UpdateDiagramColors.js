@@ -37,10 +37,7 @@ export default class extends React.Component<Props & *, *> {
 
       this.contentDocument = ref.contentDocument;
 
-      return (
-        this.contentDocument &&
-        this.contentDocument.querySelector(this.props.set[0][0])
-      );
+      return this.contentDocument && this.contentDocument.querySelector("svg");
     }).then(this.updateAttributes);
 
   updateAttributes = () => {
