@@ -4,15 +4,17 @@ import React from "react";
 
 import { mount } from "enzyme";
 
-import ResistorCalculator, {
-  DisplayComponent,
+import {
   FirstBandSelector,
   MultiplierBandSelector,
   SecondBandSelector,
-  ToleranceBandSelector,
+  ToleranceBandSelector
+} from "./bandSelectors";
+import ResistorCalculator, {
   attachStateHandlers,
   useCalculator
 } from "./ResistorCalculator";
+import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 describe("useCalculator", () => {
   const setupTest = (a, b, c, d) => {
@@ -140,7 +142,7 @@ describe("state handlers effect color changes", () => {
 describe("component interactivity", () => {
   it("responds to menu selections", () => {
     const component = mount(<ResistorCalculator />);
-    const getProps = () => component.find(DisplayComponent).props();
+    const getProps = () => component.find(ResistorCalculatorLayout).props();
     const getProp = prop => getProps()[prop];
 
     const setAndTest = (Component, band, value) => {

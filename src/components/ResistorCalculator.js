@@ -1,7 +1,6 @@
 // @flow
 
 import { compose, defaultProps, withProps, withStateHandlers } from "recompose";
-import * as React from "react";
 
 import {
   FIRST_DIGIT_COLORS,
@@ -19,36 +18,7 @@ import {
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
-import ResistorImage from "./ResistorImage";
-import Select from "./Select";
-
-type BandSelectorProps<T> = {
-  onSelectValue: T => void,
-  value: T
-};
-
-const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
-  onChange: onSelectValue,
-  options: values
-}))(Select);
-
-type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
-
-export const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
-  values: FIRST_DIGIT_COLORS
-})(GenericBandSelector);
-
-export const SecondBandSelector: BandSelector<SecondDigitColor> = withProps({
-  values: SECOND_DIGIT_COLORS
-})(GenericBandSelector);
-
-export const MultiplierBandSelector: BandSelector<MultiplierColor> = withProps({
-  values: MULTIPLIER_COLORS
-})(GenericBandSelector);
-
-export const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
-  values: TOLERANCE_COLORS
-})(GenericBandSelector);
+import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 export type BandColors = {
   bandAColor: FirstDigitColor,
@@ -56,44 +26,6 @@ export type BandColors = {
   bandCColor: MultiplierColor,
   bandDColor: ToleranceColor
 };
-
-type DisplayProps = BandColors & {
-  resistance: number,
-  tolerance: ToleranceValue,
-  minimum: number,
-  maximum: number,
-  setBandAColor: (*) => *,
-  setBandBColor: (*) => *,
-  setBandCColor: (*) => *,
-  setBandDColor: (*) => *
-};
-
-export const DisplayComponent = ({
-  resistance,
-  tolerance,
-  minimum,
-  maximum,
-  bandAColor,
-  bandBColor,
-  bandCColor,
-  bandDColor,
-  setBandAColor,
-  setBandBColor,
-  setBandCColor,
-  setBandDColor
-}: DisplayProps) => (
-  <div>
-    <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-    <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
-    <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
-    <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
-    <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
-    <div>Resistance value: {resistance}</div>
-    <div>Tolerance: {tolerance}</div>
-    <div>Minimum: {minimum}</div>
-    <div>Maximum: {maximum}</div>
-  </div>
-);
 
 export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
   compose(
@@ -143,4 +75,4 @@ const enhancer = compose(
   useCalculator(calculateOhmValueFromColors)
 );
 
-export default enhancer(DisplayComponent);
+export default enhancer(ResistorCalculatorLayout);
