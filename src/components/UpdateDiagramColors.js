@@ -16,6 +16,18 @@ type Props = {
   set?: Setters
 };
 
+const pollWhileFalsy = f =>
+  new Promise((resolve, reject) => {
+    const attempt = () => {
+      const result = f();
+
+      if (result) resolve(result);
+      else setTimeout(attempt, 10);
+    };
+
+    attempt();
+  });
+
 export default class extends React.Component<Props & *, *> {
   ref: ?ObjectElement;
   saveRef = (ref: *) => (this.ref = ref);
@@ -34,14 +46,9 @@ export default class extends React.Component<Props & *, *> {
 
     return true;
   }
-  // Polling for document ready. Until a way is found to be notified when the
-  // document is ready, try until it succeeds once.
-  pollForReady = () => {
-    this.updateAttributes() || setTimeout(this.pollForReady, 10);
-  };
   componentDidMount() {
     // Begin polling for document ready.
-    this.pollForReady();
+    pollWhileFalsy(() => this.updateAttributes());
   }
   componentDidUpdate() {
     this.updateAttributes();
