@@ -11,10 +11,10 @@ import {
   ToleranceBandSelector
 } from "./bandSelectors";
 import ResistorCalculator, {
-  ResistorCalculatorLayout,
   attachStateHandlers,
   useCalculator
 } from "./ResistorCalculator";
+import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 describe("useCalculator", () => {
   const setupTest = (a, b, c, d) => {

@@ -1,7 +1,6 @@
 // @flow
 
 import { compose, defaultProps, withProps, withStateHandlers } from "recompose";
-import * as React from "react";
 
 import {
   FIRST_DIGIT_COLORS,
@@ -14,18 +13,12 @@ import {
   type ToleranceColor
 } from "../calculator/colors";
 import {
-  FirstBandSelector,
-  MultiplierBandSelector,
-  SecondBandSelector,
-  ToleranceBandSelector
-} from "./bandSelectors";
-import {
   type OhmValueCalculatorFromColors,
   attachToleranceBounds,
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
-import ResistorImage from "./ResistorImage";
+import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 export type BandColors = {
   bandAColor: FirstDigitColor,
@@ -33,44 +26,6 @@ export type BandColors = {
   bandCColor: MultiplierColor,
   bandDColor: ToleranceColor
 };
-
-type ResistorCalculatorLayoutProps = BandColors & {
-  resistance: number,
-  tolerance: ToleranceValue,
-  minimum: number,
-  maximum: number,
-  setBandAColor: (*) => *,
-  setBandBColor: (*) => *,
-  setBandCColor: (*) => *,
-  setBandDColor: (*) => *
-};
-
-export const ResistorCalculatorLayout = ({
-  resistance,
-  tolerance,
-  minimum,
-  maximum,
-  bandAColor,
-  bandBColor,
-  bandCColor,
-  bandDColor,
-  setBandAColor,
-  setBandBColor,
-  setBandCColor,
-  setBandDColor
-}: ResistorCalculatorLayoutProps) => (
-  <div>
-    <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-    <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
-    <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
-    <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
-    <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
-    <div>Resistance value: {resistance}</div>
-    <div>Tolerance: {tolerance}</div>
-    <div>Minimum: {minimum}</div>
-    <div>Maximum: {maximum}</div>
-  </div>
-);
 
 export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
   compose(
