@@ -3,6 +3,7 @@
 import React from "react";
 
 import type { BandColors } from "./ResistorCalculator";
+import UpdateDiagramColors from "./UpdateDiagramColors";
 import resistorImageData from "../assets/resistor.svg";
 
 export default ({
@@ -11,5 +12,7 @@ export default ({
   bandCColor,
   bandDColor
 }: BandColors) => (
-  <object data={resistorImageData} aria-label="Resistor diagram" />
+  <UpdateDiagramColors>
+    <object data={resistorImageData} aria-label="Resistor diagram" />
+  </UpdateDiagramColors>
 );
