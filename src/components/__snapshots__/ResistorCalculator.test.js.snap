@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`number formatting resistance values 0 1`] = `"0 Ω"`;
+
+exports[`number formatting resistance values 0.001 1`] = `"1 mΩ"`;
+
+exports[`number formatting resistance values 1 1`] = `"1 Ω"`;
+
+exports[`number formatting resistance values 123 1`] = `"123 Ω"`;
+
+exports[`number formatting resistance values 1000 1`] = `"1 kΩ"`;
+
+exports[`number formatting resistance values 1000000 1`] = `"1 MΩ"`;
+
+exports[`number formatting resistance values 1000000000 1`] = `"1 GΩ"`;
+
+exports[`number formatting resistance values 9876543210 1`] = `"9.87654321 GΩ"`;
+
+exports[`number formatting tolerance values 0.0005 1`] = `"± 0.05%"`;
+
+exports[`number formatting tolerance values 0.001 1`] = `"± 0.1%"`;
+
+exports[`number formatting tolerance values 0.005 1`] = `"± 0.5%"`;
+
+exports[`number formatting tolerance values 0.0025 1`] = `"± 0.25%"`;
+
+exports[`number formatting tolerance values 0.01 1`] = `"± 1%"`;
+
+exports[`number formatting tolerance values 0.02 1`] = `"± 2%"`;
+
+exports[`number formatting tolerance values 0.05 1`] = `"± 5%"`;
+
+exports[`number formatting tolerance values 0.1 1`] = `"± 10%"`;
+
+exports[`number formatting tolerance values 0.2 1`] = `"± 20%"`;

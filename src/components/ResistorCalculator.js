@@ -18,6 +18,7 @@ import {
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
+import { abbreviateValue } from "../utils";
 import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 export type BandColors = {
@@ -63,6 +64,14 @@ export const attachStateHandlers = compose(
     setBandDColor: () => (bandDColor: ToleranceColor) => ({ bandDColor })
   })
 );
+
+export const formatResistanceValue = (value: number) => {
+  const [smallValue, suffix] = abbreviateValue(value);
+
+  return `${smallValue} ${suffix}Ω`;
+};
+
+export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;
 
 const enhancer = compose(
   defaultProps({
