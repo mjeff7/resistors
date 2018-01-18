@@ -10,8 +10,12 @@ import {
   SecondBandSelector,
   ToleranceBandSelector
 } from "./bandSelectors";
+import { TOLERANCE_COLORS } from "../calculator/colors";
+import { toleranceValueFromColor } from "../calculator/values";
 import ResistorCalculator, {
   attachStateHandlers,
+  formatResistanceValue,
+  formatTolerance,
   useCalculator
 } from "./ResistorCalculator";
 import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
@@ -90,23 +94,23 @@ describe("numerical output", () => {
   });
 
   it("displays the resistance somewhere", () => {
-    expect(output1).toContain("650");
-    expect(output2).toContain("9.8");
+    expect(output1).toContain("650 Ω");
+    expect(output2).toContain("9.8 Ω");
   });
 
   it("displays the tolerance somewhere", () => {
-    expect(output1).toContain("0.001");
-    expect(output2).toContain("0.1");
+    expect(output1).toContain("0.1%");
+    expect(output2).toContain("10%");
   });
 
   it("displays the minimum somewhere", () => {
-    expect(output1).toContain("649.35");
-    expect(output2).toContain("8.82");
+    expect(output1).toContain("649.35 Ω");
+    expect(output2).toContain("8.82 Ω");
   });
 
   it("displays the maximum somewhere", () => {
-    expect(output1).toContain("650.65");
-    expect(output2).toContain("10.78");
+    expect(output1).toContain("650.65 Ω");
+    expect(output2).toContain("10.8 Ω");
   });
 });
 
@@ -196,5 +200,38 @@ describe("component interactivity", () => {
       setAndTest(ToleranceBandSelector, "bandDColor", "violet");
       setAndTest(ToleranceBandSelector, "bandDColor", "silver");
     });
+  });
+});
+
+describe("number formatting", () => {
+  describe("resistance values", () => {
+    const checkValue = value => {
+      it(`${value}`, () => {
+        expect(formatResistanceValue(value)).toMatchSnapshot();
+      });
+    };
+
+    checkValue(0);
+
+    checkValue(1);
+    checkValue(1e-3);
+    checkValue(1e3);
+    checkValue(1e6);
+    checkValue(1e9);
+
+    checkValue(123);
+    checkValue(9876543210);
+  });
+
+  describe("tolerance values", () => {
+    const checkValue = value => {
+      it(`${value}`, () => {
+        expect(formatTolerance(value)).toMatchSnapshot();
+      });
+    };
+
+    TOLERANCE_COLORS.forEach(color =>
+      checkValue(toleranceValueFromColor(color))
+    );
   });
 });

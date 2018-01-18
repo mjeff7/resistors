@@ -18,6 +18,7 @@ import {
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
+import { abbreviateValue } from "../utils";
 import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
 export type BandColors = {
@@ -64,6 +65,30 @@ export const attachStateHandlers = compose(
   })
 );
 
+export const formatResistanceValue = (value: number, sigFigs: ?number) => {
+  const [smallValue, suffix] = abbreviateValue(value);
+
+  return `${sigFigs ? smallValue.toPrecision(sigFigs) : smallValue} ${suffix}Ω`;
+};
+
+export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;
+
+const getSigFigsForRangeBounds = (tolerance: ToleranceValue) =>
+  2 - Math.floor(Math.log10(tolerance));
+
+const formatValuesForDisplay = withProps(
+  ({ resistance, minimum, maximum, tolerance }) => {
+    const boundsSigFigs = getSigFigsForRangeBounds(tolerance);
+
+    return {
+      resistance: formatResistanceValue(resistance),
+      minimum: formatResistanceValue(minimum, boundsSigFigs),
+      maximum: formatResistanceValue(maximum, boundsSigFigs),
+      tolerance: formatTolerance(tolerance)
+    };
+  }
+);
+
 const enhancer = compose(
   defaultProps({
     bandAColor: FIRST_DIGIT_COLORS[0],
@@ -72,7 +97,8 @@ const enhancer = compose(
     bandDColor: TOLERANCE_COLORS[0]
   }),
   attachStateHandlers,
-  useCalculator(calculateOhmValueFromColors)
+  useCalculator(calculateOhmValueFromColors),
+  formatValuesForDisplay
 );
 
 export default enhancer(ResistorCalculatorLayout);
