@@ -11,6 +11,8 @@ import {
 } from "./bandSelectors";
 import ResistorImage from "./ResistorImage";
 
+import "./ResistorCalculatorLayout.css";
+
 type Props = BandColors & {
   resistance: string,
   tolerance: string,
@@ -37,11 +39,21 @@ export default ({
   setBandDColor
 }: Props) => (
   <div>
-    <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-    <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
-    <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
-    <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
-    <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
+    <div className="imageAndSelectors">
+      <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
+      <div className="selectors">
+        <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
+        <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
+        <MultiplierBandSelector
+          value={bandCColor}
+          onSelectValue={setBandCColor}
+        />
+        <ToleranceBandSelector
+          value={bandDColor}
+          onSelectValue={setBandDColor}
+        />
+      </div>
+    </div>
     <div>
       Resistance value: {resistance} {tolerance}
     </div>
