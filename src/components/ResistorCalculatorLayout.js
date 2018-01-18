@@ -9,14 +9,13 @@ import {
   SecondBandSelector,
   ToleranceBandSelector
 } from "./bandSelectors";
-import type { ToleranceValue } from "../calculator/values";
 import ResistorImage from "./ResistorImage";
 
 type Props = BandColors & {
-  resistance: number,
-  tolerance: ToleranceValue,
-  minimum: number,
-  maximum: number,
+  resistance: string,
+  tolerance: string,
+  minimum: string,
+  maximum: string,
   setBandAColor: (*) => *,
   setBandBColor: (*) => *,
   setBandCColor: (*) => *,

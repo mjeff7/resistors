@@ -73,6 +73,15 @@ export const formatResistanceValue = (value: number) => {
 
 export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;
 
+const formatValuesForDisplay = withProps(
+  ({ resistance, minimum, maximum, tolerance }) => ({
+    resistance: formatResistanceValue(resistance),
+    minimum: formatResistanceValue(minimum),
+    maximum: formatResistanceValue(maximum),
+    tolerance: formatTolerance(tolerance)
+  })
+);
+
 const enhancer = compose(
   defaultProps({
     bandAColor: FIRST_DIGIT_COLORS[0],
@@ -81,7 +90,8 @@ const enhancer = compose(
     bandDColor: TOLERANCE_COLORS[0]
   }),
   attachStateHandlers,
-  useCalculator(calculateOhmValueFromColors)
+  useCalculator(calculateOhmValueFromColors),
+  formatValuesForDisplay
 );
 
 export default enhancer(ResistorCalculatorLayout);

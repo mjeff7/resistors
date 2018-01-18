@@ -94,23 +94,23 @@ describe("numerical output", () => {
   });
 
   it("displays the resistance somewhere", () => {
-    expect(output1).toContain("650");
-    expect(output2).toContain("9.8");
+    expect(output1).toContain("650 Ω");
+    expect(output2).toContain("9.8 Ω");
   });
 
   it("displays the tolerance somewhere", () => {
-    expect(output1).toContain("0.001");
-    expect(output2).toContain("0.1");
+    expect(output1).toContain("0.1%");
+    expect(output2).toContain("10%");
   });
 
   it("displays the minimum somewhere", () => {
-    expect(output1).toContain("649.35");
-    expect(output2).toContain("8.82");
+    expect(output1).toContain("649.35 Ω");
+    expect(output2).toContain("8.82 Ω");
   });
 
   it("displays the maximum somewhere", () => {
-    expect(output1).toContain("650.65");
-    expect(output2).toContain("10.78");
+    expect(output1).toContain("650.65 Ω");
+    expect(output2).toContain("10.780000000000001 Ω");
   });
 });
 
