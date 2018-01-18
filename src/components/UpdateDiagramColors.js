@@ -28,31 +28,40 @@ const pollWhileFalsy = f =>
     attempt();
   });
 
+const chainPollWhileFalsy = f => x => pollWhileFalsy(() => f(x));
+
 export default class extends React.Component<Props & *, *> {
-  ref: ?ObjectElement;
-  saveRef = (ref: *) => (this.ref = ref);
-  updateAttributes() {
-    if (!this.ref || !this.ref.contentDocument || !this.props.set) return false;
-    const { contentDocument } = this.ref;
+  contentDocument: ?Document;
+
+  saveRef = (ref: ?ObjectElement): Promise<*> =>
+    pollWhileFalsy(() => {
+      if (!ref) return;
+
+      this.contentDocument = ref.contentDocument;
+
+      return (
+        this.contentDocument &&
+        this.contentDocument.querySelector(this.props.set[0][0])
+      );
+    }).then(this.updateAttributes);
+
+  updateAttributes = () => {
+    if (!this.contentDocument || !this.props.set) return;
 
     for (let [selector, newFill] of this.props.set) {
-      const target = contentDocument.querySelector(selector);
+      const target = this.contentDocument.querySelector(selector);
 
       if (target) {
         target.setAttribute("fill", newFill);
         target.setAttribute("style", "transition: 1s");
-      } else return false;
+      }
     }
+  };
 
-    return true;
-  }
-  componentDidMount() {
-    // Begin polling for document ready.
-    pollWhileFalsy(() => this.updateAttributes());
-  }
   componentDidUpdate() {
     this.updateAttributes();
   }
+
   render() {
     const { set, ariaLabel, ...remainingProps } = this.props;
 
