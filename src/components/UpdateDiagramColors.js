@@ -29,8 +29,11 @@ const pollWhileFalsy = f =>
   });
 
 export default class extends React.Component<Props & *, *> {
+  // Save a reference to the svg DOM object.
   contentDocument: ?Document;
 
+  // Take the reference and poll until the object is ready and we have a
+  // reliable reference to store.
   saveRef = (ref: ?ObjectElement): Promise<*> =>
     pollWhileFalsy(() => {
       if (!ref) return;
@@ -40,6 +43,7 @@ export default class extends React.Component<Props & *, *> {
       return this.contentDocument && this.contentDocument.querySelector("svg");
     }).then(this.updateAttributes);
 
+  // Apply changes to the DOM.
   updateAttributes = () => {
     if (!this.contentDocument || !this.props.set) return;
 
