@@ -19,6 +19,7 @@ import {
   calculateOhmValueFromColors
 } from "../calculator/calculator";
 import type { ToleranceValue } from "../calculator/values";
+import ResistorImage from "./ResistorImage";
 import Select from "./Select";
 
 type BandSelectorProps<T> = {
@@ -82,6 +83,7 @@ export const DisplayComponent = ({
   setBandDColor
 }: DisplayProps) => (
   <div>
+    <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
     <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
     <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
     <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
