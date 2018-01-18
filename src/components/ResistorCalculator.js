@@ -49,15 +49,18 @@ export const ToleranceBandSelector: BandSelector<ToleranceColor> = withProps({
   values: TOLERANCE_COLORS
 })(GenericBandSelector);
 
-type DisplayProps = {
+export type BandColors = {
+  bandAColor: FirstDigitColor,
+  bandBColor: SecondDigitColor,
+  bandCColor: MultiplierColor,
+  bandDColor: ToleranceColor
+};
+
+type DisplayProps = BandColors & {
   resistance: number,
   tolerance: ToleranceValue,
   minimum: number,
   maximum: number,
-  bandAColor: FirstDigitColor,
-  bandBColor: SecondDigitColor,
-  bandCColor: MultiplierColor,
-  bandDColor: ToleranceColor,
   setBandAColor: (*) => *,
   setBandBColor: (*) => *,
   setBandCColor: (*) => *,
@@ -93,17 +96,7 @@ export const DisplayComponent = ({
 export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
   compose(
     withProps(
-      ({
-        bandAColor,
-        bandBColor,
-        bandCColor,
-        bandDColor
-      }: {
-        bandAColor: FirstDigitColor,
-        bandBColor: SecondDigitColor,
-        bandCColor: MultiplierColor,
-        bandDColor: ToleranceColor
-      }) => {
+      ({ bandAColor, bandBColor, bandCColor, bandDColor }: BandColors) => {
         // Explicitly destructure and return these properties so that Flow sees
         // that they are present as component properties.
         const { resistance, tolerance } = calculator(
