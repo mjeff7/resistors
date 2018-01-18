@@ -42,9 +42,11 @@ export default ({
     <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
     <MultiplierBandSelector value={bandCColor} onSelectValue={setBandCColor} />
     <ToleranceBandSelector value={bandDColor} onSelectValue={setBandDColor} />
-    <div>Resistance value: {resistance}</div>
-    <div>Tolerance: {tolerance}</div>
-    <div>Minimum: {minimum}</div>
-    <div>Maximum: {maximum}</div>
+    <div>
+      Resistance value: {resistance} {tolerance}
+    </div>
+    <div>
+      Range: {minimum} to {maximum}
+    </div>
   </div>
 );
