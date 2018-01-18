@@ -6,13 +6,22 @@ import type { BandColors } from "./ResistorCalculator";
 import UpdateDiagramColors from "./UpdateDiagramColors";
 import resistorImageData from "../assets/resistor.svg";
 
-export default ({
+const getTargetsToAdjust = ({
   bandAColor,
   bandBColor,
   bandCColor,
   bandDColor
-}: BandColors) => (
-  <UpdateDiagramColors>
-    <object data={resistorImageData} aria-label="Resistor diagram" />
-  </UpdateDiagramColors>
+}) => [
+  ["#bandA", bandAColor],
+  ["#bandB", bandBColor],
+  ["#bandC", bandCColor],
+  ["#bandD", bandDColor === "none" ? "#0000" : bandDColor]
+];
+
+export default (props: BandColors) => (
+  <UpdateDiagramColors
+    data={resistorImageData}
+    ariaLabel="Resistor diagram"
+    set={getTargetsToAdjust(props)}
+  />
 );
