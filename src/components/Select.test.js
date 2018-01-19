@@ -42,3 +42,43 @@ it("uses the passed in value if present", () => {
   expect(actualValue).toBe(initialValue);
   expect(pose(component)).toMatchSnapshot();
 });
+
+describe("styles", () => {
+  it("includes the passed styles", () => {
+    const component = (
+      <Select
+        onChange={() => null}
+        options={["apple", "banana"]}
+        styles={{ apple: { background: "red" } }}
+      />
+    );
+
+    expect(pose(component)).toMatchSnapshot();
+  });
+
+  it("it works without any styles", () => {
+    const component = <Select onChange={() => null} options={["apple"]} />;
+
+    expect(pose(component)).toMatchSnapshot();
+  });
+
+  it("it works with empty styles", () => {
+    const component = (
+      <Select onChange={() => null} options={["apple"]} styles={{}} />
+    );
+
+    expect(pose(component)).toMatchSnapshot();
+  });
+
+  it("it works with unused styles", () => {
+    const component = (
+      <Select
+        onChange={() => null}
+        options={["apple"]}
+        styles={{ banana: { color: "blue" } }}
+      />
+    );
+
+    expect(pose(component)).toMatchSnapshot();
+  });
+});

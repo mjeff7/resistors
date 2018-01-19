@@ -22,7 +22,8 @@ type BandSelectorProps<T> = {
 
 const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
   onChange: onSelectValue,
-  options: values
+  options: values,
+  styles: {}
 }))(Select);
 
 type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
