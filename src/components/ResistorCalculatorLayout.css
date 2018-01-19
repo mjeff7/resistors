@@ -9,6 +9,20 @@
   justify-content: flex-start;
 }
 
+/*
+ * Resistor image
+ */
+
+/* Make the resistor image respond to size of surroundings. It needs height or
+ * width explicitly set on the parent in absolute terms, or an unbroken chain
+ * of parents each setting those properties as percentages until the final
+ * parent sets it in concrete terms. */
+.resistorImageWrapper, .resistorImageWrapper > div {
+  height: 100%;
+  width: 100%;
+}
+
 svg {
+  height: 100%;
   width: 100%;
 }
