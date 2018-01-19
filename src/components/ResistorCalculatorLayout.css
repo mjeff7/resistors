@@ -1,0 +1,17 @@
+.imageAndSelectors {
+  display: flex;
+  height: 100%;
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.selectors > * {
+}
+
+object {
+  height: 100%;
+}
