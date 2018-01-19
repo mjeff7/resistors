@@ -14,6 +14,8 @@ const centeringStyle = {
 
 const App = () => (
   <div style={centeringStyle}>
+    <div className="title">Resistance Calculator</div>
+    <div className="subTitle">Turn color bands into resistor specs</div>
     <ResistorCalculator />
   </div>
 );
