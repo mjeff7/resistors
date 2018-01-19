@@ -64,10 +64,10 @@ type BandSelectorProps<T> = {
   value: T
 };
 
-const GenericBandSelector = withProps(({ onSelectValue, values }) => ({
+const GenericBandSelector = withProps(({ onSelectValue, value, values }) => ({
   onChange: onSelectValue,
   options: values,
-  styles: MENU_STYLES
+  styles: { ...MENU_STYLES, null: MENU_STYLES[value] }
 }))(Select);
 
 type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
