@@ -1,4 +1,4 @@
-import { abbreviateValue, transformArgs } from "./utils";
+import { abbreviateValue, transformArgs } from "./";
 
 describe("transformArgs", () => {
   it("transforms the arguments with the functions given", () => {
