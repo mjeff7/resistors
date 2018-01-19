@@ -1,59 +1,52 @@
 // @flow
 
 import * as React from "react";
+import ReactSVG from "react-svg";
 
 type Selector = string;
 type Value = string;
 
 type Setters = Array<[Selector, Value]>;
 
-type ObjectElement = HTMLElement & { contentDocument?: Document };
-
 type Props = {
-  // aria is explicitly passed here to pacify the linter, which does not catch
-  // that it is included in props spread.
-  ariaLabel: string,
   set?: Setters
 };
 
-const pollWhileFalsy = f =>
-  new Promise((resolve, reject) => {
-    const attempt = () => {
-      const result = f();
-
-      if (result) resolve(result);
-      else setTimeout(attempt, 10);
-    };
-
-    attempt();
-  });
-
 export default class extends React.Component<Props & *, *> {
+  // Store the SVG component so that it is never updated by React.
+  svg: React.Node;
+
   // Save a reference to the svg DOM object.
-  contentDocument: ?Document;
+  svgElement: HTMLElement;
 
-  // Take the reference and poll until the object is ready and we have a
-  // reliable reference to store.
-  saveRef = (ref: ?ObjectElement): Promise<*> =>
-    pollWhileFalsy(() => {
-      if (!ref) return;
+  // Save a reference that is needed to update properties.
+  saveElement = (ref: HTMLElement) => {
+    if (this.props.callback) this.props.callback(ref);
 
-      this.contentDocument = ref.contentDocument;
+    this.svgElement = ref;
+    this.updateAttributes();
+  };
 
-      return this.contentDocument && this.contentDocument.querySelector("svg");
-    }).then(this.updateAttributes);
+  componentWillMount() {
+    // Support passing some properties to the element.
+    const { path, className, wrapperClassName, style } = this.props;
+    this.svg = (
+      <ReactSVG
+        callback={this.saveElement}
+        {...{ path, className, wrapperClassName, style }}
+      />
+    );
+  }
 
   // Apply changes to the DOM.
   updateAttributes = () => {
-    if (!this.contentDocument || !this.props.set) return;
+    if (!this.svgElement || !this.props.set) return;
 
     for (let [selector, newFill] of this.props.set) {
-      const target = this.contentDocument.querySelector(selector);
-
-      if (target) {
+      this.svgElement.querySelectorAll(selector).forEach(target => {
         target.setAttribute("fill", newFill);
         target.setAttribute("style", "transition: 1s");
-      }
+      });
     }
   };
 
@@ -61,11 +54,5 @@ export default class extends React.Component<Props & *, *> {
     this.updateAttributes();
   }
 
-  render() {
-    const { set, ariaLabel, ...remainingProps } = this.props;
-
-    return (
-      <object ref={this.saveRef} aria-label={ariaLabel} {...remainingProps} />
-    );
-  }
+  render = () => this.svg;
 }

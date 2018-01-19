@@ -20,7 +20,7 @@ const getTargetsToAdjust = ({
 
 export default (props: BandColors) => (
   <UpdateDiagramColors
-    data={resistorImageData}
+    path={resistorImageData}
     ariaLabel="Resistor diagram"
     set={getTargetsToAdjust(props)}
   />

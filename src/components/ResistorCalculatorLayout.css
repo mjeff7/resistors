@@ -15,3 +15,7 @@
 object {
   height: 100%;
 }
+
+svg {
+  width: 50%;
+}
