@@ -73,3 +73,7 @@ svg {
   border-radius: 1rem;
   font-variant: small-caps;
 }
+
+#bandA, #bandB, #bandC, #bandD, select {
+  transition: 1s;
+}

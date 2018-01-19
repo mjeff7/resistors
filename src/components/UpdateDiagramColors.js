@@ -122,7 +122,6 @@ export default class extends React.Component<Props & *, *> {
     for (let [selector, newFill] of this.props.set) {
       this.svgElement.querySelectorAll(selector).forEach(target => {
         target.setAttribute("fill", newFill);
-        target.setAttribute("style", "transition: 1s");
       });
     }
   };
