@@ -16,11 +16,27 @@ import "./ResistorCalculatorLayout.css";
 
 type SpacerProps = {
   children: Array<React.Node>,
+  padTo?: number,
   spacing: Array<number>
 };
 
-const Spacer = ({ children, spacing = [], ...remainingProps }: SpacerProps) => {
-  const spacers = spacing.map((spacerSize, spacerIndex) => (
+const add = (a, b) => a + b;
+const sum = (arr: Array<*>) => arr.reduce(add, 0);
+
+const addPadding = (spacing: Array<*>, padTo: number) => {
+  const spacingSum = sum(spacing);
+
+  return spacingSum > padTo ? spacing : spacing.concat(padTo - spacingSum);
+};
+
+const Spacer = ({
+  children,
+  padTo,
+  spacing = [],
+  ...remainingProps
+}: SpacerProps) => {
+  const actualSpacing = padTo ? addPadding(spacing, padTo) : spacing;
+  const spacers = actualSpacing.map((spacerSize, spacerIndex) => (
     <div key={spacerIndex} style={{ flexGrow: spacerSize }} />
   ));
 
@@ -57,7 +73,7 @@ export default ({
   <div>
     <div className="imageAndSelectors">
       <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-      <Spacer className="selectors" spacing={[]}>
+      <Spacer className="selectors" spacing={[1, 1, 1, 1, 1]}>
         <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
         <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
         <MultiplierBandSelector
