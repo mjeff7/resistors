@@ -1,4 +1,4 @@
-import { abbreviateValue } from "./";
+import { abbreviateValue } from "./abbreviateValue";
 
 describe("abbreviateValue", () => {
   describe("returns a value at least 1 and less than 1000 or 0", () => {
