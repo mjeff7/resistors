@@ -6,7 +6,7 @@ type Props<T> = {
   onChange: T => mixed,
   options: Array<T>,
   +value?: T,
-  +styles?: { [T]: ?{} }
+  +styles?: { [T | null]: ?{} }
 };
 
 export default <T: string>({
@@ -15,7 +15,11 @@ export default <T: string>({
   value,
   styles = {}
 }: Props<T>) => (
-  <select onChange={e => onChange(e.target.value)} value={value}>
+  <select
+    onChange={e => onChange(e.target.value)}
+    value={value}
+    style={styles[null]}
+  >
     {options.map((option, optionIndex) => (
       <option
         key={optionIndex}

@@ -3,6 +3,7 @@
 exports[`includes the options given to it 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value={undefined}
 >
   <option
@@ -33,9 +34,28 @@ exports[`includes the options given to it 1`] = `
 </select>
 `;
 
+exports[`styles includes the null style on the menu itself 1`] = `
+<select
+  onChange={[Function]}
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+  value={undefined}
+>
+  <option
+    label="apple"
+    style={undefined}
+    value="apple"
+  />
+</select>
+`;
+
 exports[`styles includes the passed styles 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value={undefined}
 >
   <option
@@ -58,6 +78,7 @@ exports[`styles includes the passed styles 1`] = `
 exports[`styles it works with empty styles 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value={undefined}
 >
   <option
@@ -71,6 +92,7 @@ exports[`styles it works with empty styles 1`] = `
 exports[`styles it works with unused styles 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value={undefined}
 >
   <option
@@ -84,6 +106,7 @@ exports[`styles it works with unused styles 1`] = `
 exports[`styles it works without any styles 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value={undefined}
 >
   <option
@@ -97,6 +120,7 @@ exports[`styles it works without any styles 1`] = `
 exports[`uses the passed in value if present 1`] = `
 <select
   onChange={[Function]}
+  style={undefined}
   value="b"
 >
   <option

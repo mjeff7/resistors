@@ -56,6 +56,18 @@ describe("styles", () => {
     expect(pose(component)).toMatchSnapshot();
   });
 
+  it("includes the null style on the menu itself", () => {
+    const component = (
+      <Select
+        onChange={() => null}
+        options={["apple"]}
+        styles={{ null: { background: "red" } }}
+      />
+    );
+
+    expect(pose(component)).toMatchSnapshot();
+  });
+
   it("it works without any styles", () => {
     const component = <Select onChange={() => null} options={["apple"]} />;
 
