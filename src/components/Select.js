@@ -11,9 +11,7 @@ type Props<T> = {
 export default ({ onChange, options, value }: Props<*>) => (
   <select onChange={e => onChange(e.target.value)} value={value}>
     {options.map((option, optionIndex) => (
-      <option key={optionIndex} value={option}>
-        {option}
-      </option>
+      <option key={optionIndex} value={option} label={option} />
     ))}
   </select>
 );

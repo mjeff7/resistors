@@ -6,30 +6,25 @@ exports[`includes the options given to it 1`] = `
   value={undefined}
 >
   <option
+    label="apple"
     value="apple"
-  >
-    apple
-  </option>
+  />
   <option
+    label="peppermint"
     value="peppermint"
-  >
-    peppermint
-  </option>
+  />
   <option
+    label="banana"
     value="banana"
-  >
-    banana
-  </option>
+  />
   <option
+    label="cinnamon"
     value="cinnamon"
-  >
-    cinnamon
-  </option>
+  />
   <option
+    label="cherry"
     value="cherry"
-  >
-    cherry
-  </option>
+  />
 </select>
 `;
 
@@ -39,24 +34,20 @@ exports[`uses the passed in value if present 1`] = `
   value="b"
 >
   <option
+    label="a"
     value="a"
-  >
-    a
-  </option>
+  />
   <option
+    label="p"
     value="p"
-  >
-    p
-  </option>
+  />
   <option
+    label="b"
     value="b"
-  >
-    b
-  </option>
+  />
   <option
+    label="c"
     value="c"
-  >
-    c
-  </option>
+  />
 </select>
 `;
