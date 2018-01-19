@@ -28,14 +28,37 @@ export default class extends React.Component<Props & *, *> {
   };
 
   componentWillMount() {
-    // Support passing some properties to the element.
-    const { path, className, wrapperClassName, style } = this.props;
-    this.svg = (
-      <ReactSVG
-        callback={this.saveElement}
-        {...{ path, className, wrapperClassName, style }}
-      />
-    );
+    // react-svg raises an error in uncooperative environments, e.g. testing.
+    // This just means that the image is unavailable but creates a large amount
+    // of error logging. React currently allows catching these errors but
+    // insists on noisily reporting them even if caught with componentDidCatch.
+    // A patch is in the works to allow suppressing caught and expected errors,
+    // but until then, take an alternate route if react-svg would raise an
+    // error.
+
+    // Declare the saught after variable so flow does not flag it as unresolved.
+    declare var SVGSVGElement: *;
+    if (typeof SVGSVGElement !== "undefined") {
+      // All is okay and as expected.
+
+      // Support passing some properties to the element.
+      const { path, className, wrapperClassName, style } = this.props;
+      this.svg = (
+        <ReactSVG
+          callback={this.saveElement}
+          {...{ path, className, wrapperClassName, style }}
+        />
+      );
+    } else {
+      // We're in an environment about which react-svg will complain.
+      // Acknowledge the issue in case anyone is seeing this.
+      this.svg = (
+        <div>
+          Something went wrong with the image here. Rely on your mind's eye
+          instead (or try reloading).
+        </div>
+      );
+    }
   }
 
   // Apply changes to the DOM.
