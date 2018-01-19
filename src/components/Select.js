@@ -21,12 +21,9 @@ export default <T: string>({
     style={styles[null]}
   >
     {options.map((option, optionIndex) => (
-      <option
-        key={optionIndex}
-        value={option}
-        label={option}
-        style={styles[option]}
-      />
+      <option key={optionIndex} value={option} style={styles[option]}>
+        {option}
+      </option>
     ))}
   </select>
 );

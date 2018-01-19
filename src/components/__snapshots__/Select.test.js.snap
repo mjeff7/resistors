@@ -7,30 +7,35 @@ exports[`includes the options given to it 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={undefined}
     value="apple"
-  />
+  >
+    apple
+  </option>
   <option
-    label="peppermint"
     style={undefined}
     value="peppermint"
-  />
+  >
+    peppermint
+  </option>
   <option
-    label="banana"
     style={undefined}
     value="banana"
-  />
+  >
+    banana
+  </option>
   <option
-    label="cinnamon"
     style={undefined}
     value="cinnamon"
-  />
+  >
+    cinnamon
+  </option>
   <option
-    label="cherry"
     style={undefined}
     value="cherry"
-  />
+  >
+    cherry
+  </option>
 </select>
 `;
 
@@ -45,10 +50,11 @@ exports[`styles includes the null style on the menu itself 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={undefined}
     value="apple"
-  />
+  >
+    apple
+  </option>
 </select>
 `;
 
@@ -59,19 +65,21 @@ exports[`styles includes the passed styles 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={
       Object {
         "background": "red",
       }
     }
     value="apple"
-  />
+  >
+    apple
+  </option>
   <option
-    label="banana"
     style={undefined}
     value="banana"
-  />
+  >
+    banana
+  </option>
 </select>
 `;
 
@@ -82,10 +90,11 @@ exports[`styles it works with empty styles 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={undefined}
     value="apple"
-  />
+  >
+    apple
+  </option>
 </select>
 `;
 
@@ -96,10 +105,11 @@ exports[`styles it works with unused styles 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={undefined}
     value="apple"
-  />
+  >
+    apple
+  </option>
 </select>
 `;
 
@@ -110,10 +120,11 @@ exports[`styles it works without any styles 1`] = `
   value={undefined}
 >
   <option
-    label="apple"
     style={undefined}
     value="apple"
-  />
+  >
+    apple
+  </option>
 </select>
 `;
 
@@ -124,24 +135,28 @@ exports[`uses the passed in value if present 1`] = `
   value="b"
 >
   <option
-    label="a"
     style={undefined}
     value="a"
-  />
+  >
+    a
+  </option>
   <option
-    label="p"
     style={undefined}
     value="p"
-  />
+  >
+    p
+  </option>
   <option
-    label="b"
     style={undefined}
     value="b"
-  />
+  >
+    b
+  </option>
   <option
-    label="c"
     style={undefined}
     value="c"
-  />
+  >
+    c
+  </option>
 </select>
 `;
