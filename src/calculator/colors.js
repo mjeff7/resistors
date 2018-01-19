@@ -23,18 +23,7 @@
  * Colors that are valid as digits, i.e. the first two bands.
  */
 
-export type FirstDigitColor =
-  | "brown"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "green"
-  | "blue"
-  | "violet"
-  | "grey"
-  | "white";
-
-export const FIRST_DIGIT_COLORS: Array<FirstDigitColor> = [
+export const FIRST_DIGIT_COLORS = [
   "brown",
   "red",
   "orange",
@@ -46,32 +35,17 @@ export const FIRST_DIGIT_COLORS: Array<FirstDigitColor> = [
   "white"
 ];
 
-export type SecondDigitColor = "black" | FirstDigitColor;
+export type FirstDigitColor = $ElementType<typeof FIRST_DIGIT_COLORS, number>;
 
-export const SECOND_DIGIT_COLORS: Array<SecondDigitColor> = ["black"].concat(
-  FIRST_DIGIT_COLORS
-);
+export const SECOND_DIGIT_COLORS = ["black"].concat(FIRST_DIGIT_COLORS);
+
+export type SecondDigitColor = $ElementType<typeof SECOND_DIGIT_COLORS, number>;
 
 /*
  * Colors that represent the multiplier, i.e. the third band.
  */
 
-export type MultiplierColor =
-  | "pink"
-  | "silver"
-  | "gold"
-  | "black"
-  | "brown"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "green"
-  | "blue"
-  | "violet"
-  | "grey"
-  | "white";
-
-export const MULTIPLIER_COLORS: Array<MultiplierColor> = [
+export const MULTIPLIER_COLORS = [
   "pink",
   "silver",
   "gold",
@@ -87,22 +61,13 @@ export const MULTIPLIER_COLORS: Array<MultiplierColor> = [
   "white"
 ];
 
+export type MultiplierColor = $ElementType<typeof MULTIPLIER_COLORS, number>;
+
 /*
  * Colors that represent the tolerance, i.e. the fourth band.
  */
 
-export type ToleranceColor =
-  | "none"
-  | "silver"
-  | "gold"
-  | "brown"
-  | "red"
-  | "green"
-  | "blue"
-  | "violet"
-  | "grey";
-
-export const TOLERANCE_COLORS: Array<ToleranceColor> = [
+export const TOLERANCE_COLORS = [
   "none",
   "silver",
   "gold",
@@ -113,6 +78,8 @@ export const TOLERANCE_COLORS: Array<ToleranceColor> = [
   "violet",
   "grey"
 ];
+
+export type ToleranceColor = $ElementType<typeof TOLERANCE_COLORS, number>;
 
 /*
  * All colors
