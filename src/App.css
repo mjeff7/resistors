@@ -1,4 +1,10 @@
+
+/* Project-wide imports */
+
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro:700|Montserrat:500');
+
+
+/* General frame of the page */
 
 #root {
   display: inline-block;
@@ -6,6 +12,9 @@
   border-bottom: 1px solid black;
   padding: 2rem;
 };
+
+
+/* Title styling */
 
 .titleBlock {
   margin: 1rem;
