@@ -1,5 +1,13 @@
 // @flow
 
+/*
+ * ResistorImage
+ *
+ * A component that takes the current color selection and translates them into
+ * attributes to adjust for visual feedback. Actual image and update is done
+ * elsewhere.
+ */
+
 import React from "react";
 
 import type { BandColors } from "./ResistorCalculator";
