@@ -14,9 +14,22 @@
  */
 
 .calculatedResistanceDisplay {
-  background: lightgrey;
+  font-size: 1.5rem;
   margin: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
+
+  border-radius: 1rem;
+  border: 1px solid lightgrey;
+}
+
+.calculatedResistanceDisplay > div {
+  margin: 0.5rem;
+}
+
+.caption {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid black;
 }
 
 /*
