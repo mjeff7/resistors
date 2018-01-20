@@ -64,13 +64,13 @@ type BandSelectorProps<T> = {
   value: T
 };
 
+type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
+
 const GenericBandSelector = withProps(({ onSelectValue, value, values }) => ({
   onChange: onSelectValue,
   options: values,
   styles: { ...MENU_STYLES, null: MENU_STYLES[value] }
 }))(Select);
-
-type BandSelector<T> = React.ComponentType<BandSelectorProps<T>>;
 
 export const FirstBandSelector: BandSelector<FirstDigitColor> = withProps({
   values: FIRST_DIGIT_COLORS
