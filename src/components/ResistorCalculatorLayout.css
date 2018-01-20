@@ -36,3 +36,19 @@ svg {
   height: 100%;
   width: 100%;
 }
+
+
+/*
+ * Selectors menus
+ */
+
+.selectors {
+  background: lightgrey;
+  padding: 1rem;
+}
+
+.selectors > select {
+  font-size: 2rem;
+  font-family: 'Maven Pro', sans-serif;
+  padding: 0.5rem;
+}
