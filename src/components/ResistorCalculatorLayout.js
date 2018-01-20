@@ -73,11 +73,12 @@ export default ({
   <div>
     <div className="calculatedResistanceDisplay">
       <div>
-        Resistance value: {resistance} {tolerance}
+        {resistance} {tolerance}
       </div>
       <div>
-        Range: {minimum} to {maximum}
+        {minimum} to {maximum}
       </div>
+      <div className="caption">Resistor spec with these colors</div>
     </div>
     <div className="imageAndSelectors">
       <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
