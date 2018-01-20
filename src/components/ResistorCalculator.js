@@ -1,6 +1,12 @@
 // @flow
 
-import { compose, defaultProps, withProps, withStateHandlers } from "recompose";
+import {
+  compose,
+  defaultProps,
+  withProps,
+  withStateHandlers,
+  type HOC
+} from "recompose";
 
 import {
   FIRST_DIGIT_COLORS,
@@ -28,7 +34,9 @@ export type BandColors = {
   bandDColor: ToleranceColor
 };
 
-export const useCalculator = (calculator: OhmValueCalculatorFromColors) =>
+export const useCalculator = (
+  calculator: OhmValueCalculatorFromColors
+): HOC<*, *> =>
   compose(
     withProps(
       ({ bandAColor, bandBColor, bandCColor, bandDColor }: BandColors) => {
