@@ -1,5 +1,20 @@
 // @flow
 
+/*
+ * Provide the values corresponding to various colors in various positions
+ * as lookup functions. Use them like so:
+ *
+ *    import {
+ *      firstDigitFromColor,
+ *      secondDigitFromColor,
+ *      multiplierExponentFromColor,
+ *      toleranceValueFromColor
+ *    } from "./values";
+ *    import { Colors } from "./colors";
+ *
+ *    firstDigitFromColor(Colors.BROWN) === 1;
+ */
+
 import type {
   FirstDigitColor,
   SecondDigitColor,
@@ -49,6 +64,10 @@ export type ToleranceValue =
   | 0.0025
   | 0.001
   | 0.0005;
+
+/*
+ * Lookup functions.
+ */
 
 const lookupColorDigit = <T: string>(color: T) => DIGIT_VALUES_BY_COLOR[color];
 

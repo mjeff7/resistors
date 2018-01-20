@@ -1,5 +1,13 @@
 // @flow
 
+/*
+ * ResistorCalculator
+ *
+ * Provides the logic wiring the pieces of the calculator interface together
+ * and passes them on to a display component.
+ *
+ */
+
 import {
   compose,
   defaultProps,
@@ -27,6 +35,11 @@ import type { ToleranceValue } from "../calculator/values";
 import { abbreviateValue } from "../utils";
 import ResistorCalculatorLayout from "./ResistorCalculatorLayout";
 
+/*
+ * Types.
+ */
+
+// The part of state representing the current color selection.
 export type BandColors = {
   bandAColor: FirstDigitColor,
   bandBColor: SecondDigitColor,
@@ -34,6 +47,14 @@ export type BandColors = {
   bandDColor: ToleranceColor
 };
 
+/*
+ * HOCs
+ */
+
+/*  Calculator HOC  */
+
+// Takes the calculator to use and returns an HOC that translates color bands
+// provided on props into resistor specs it provides on props.
 export const useCalculator = (
   calculator: OhmValueCalculatorFromColors
 ): HOC<*, *> =>
@@ -58,6 +79,10 @@ export const useCalculator = (
     })
   );
 
+/*  State HOC   */
+
+// An HOC that provides BandColors as state and setBandAColor, setBandBColor,
+// etc. as setters for that state.
 export const attachStateHandlers = compose(
   withStateHandlers(({ bandAColor }) => ({ bandAColor }), {
     setBandAColor: () => (bandAColor: FirstDigitColor) => ({ bandAColor })
@@ -73,6 +98,8 @@ export const attachStateHandlers = compose(
   })
 );
 
+/*  Formatting HOC  */
+
 export const formatResistanceValue = (value: number, sigFigs: ?number) => {
   const [smallValue, suffix] = abbreviateValue(value);
 
@@ -84,6 +111,10 @@ export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;
 const getSigFigsForRangeBounds = (tolerance: ToleranceValue) =>
   2 - Math.floor(Math.log10(tolerance));
 
+// HOC that formats resistor specs from numerical values to more human readable
+// strings. They are provided in the props under the same names; e.g. it takes
+// props.resistance as a number and passes on props.resistance as a formatted
+// string.
 const formatValuesForDisplay = withProps(
   ({ resistance, minimum, maximum, tolerance }) => {
     const boundsSigFigs = getSigFigsForRangeBounds(tolerance);
@@ -97,6 +128,9 @@ const formatValuesForDisplay = withProps(
   }
 );
 
+/*  Combined component  */
+
+// HOC that collects the effects of the above HOCs.
 const enhancer = compose(
   defaultProps({
     bandAColor: FIRST_DIGIT_COLORS[0],

@@ -1,5 +1,12 @@
 // @flow
 
+/*
+ * ResistorCalculatorLayout
+ *
+ * A simple display component that presents the formatted resisitor specs to
+ * user and allows the user to choose colors.
+ */
+
 import "./ResistorCalculatorLayout.css";
 
 import * as React from "react";

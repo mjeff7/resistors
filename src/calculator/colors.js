@@ -4,7 +4,7 @@
  * Enumerate the colors used as bands on resistors. Colors can be imported
  * as an object with
  *
- *    import { Colors } from './colors';
+ *    import { Colors } from "./colors";
  *
  * which are objects with the color constants as keys.
  *
@@ -16,6 +16,15 @@
  *      third band.
  *   4. ToleranceColor: Colors representing the tolerance, valid on the fourth
  *      band.
+ *
+ * The valid colors for each band can be imported as an array as well with
+ *
+ *    import {
+ *      FIRST_DIGIT_COLORS,
+ *      SECOND_DIGIT_COLORS,
+ *      MULTIPLIER_COLORS,
+ *      TOLERANCE_COLORS
+ *    } from "./colors";
  *
  */
 
