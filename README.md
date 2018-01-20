@@ -4,6 +4,8 @@ Resistors follow a color scheme to indicate how much resistance they provide.
 How much resistance comes in a resistor? Enter their color bands here and find
 out.
 
+[Try it](https://mjeff7.github.io/resistors/) now.
+
 ### How to use
 
 Color coded resistors typically have between 4 and 6 bands, each representing a
