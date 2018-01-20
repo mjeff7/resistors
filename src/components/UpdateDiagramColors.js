@@ -20,11 +20,15 @@ export default class extends React.Component<Props & *, *> {
   svgElement: HTMLElement;
 
   // Save a reference that is needed to update properties.
-  saveElement = (ref: HTMLElement) => {
-    if (this.props.callback) this.props.callback(ref);
+  saveElement = (ref: HTMLElement | string) => {
+    if (typeof ref === "string") this.respondToError();
+    else {
+      this.svgElement = ref;
 
-    this.svgElement = ref;
-    this.updateAttributes();
+      if (this.props.callback) this.props.callback(ref);
+
+      this.updateAttributes();
+    }
   };
 
   componentWillMount() {
@@ -59,13 +63,21 @@ export default class extends React.Component<Props & *, *> {
     } else {
       // We're in an environment about which react-svg will complain.
       // Acknowledge the issue in case anyone is seeing this.
-      this.svg = (
-        <div>
-          Something went wrong with the image here. Rely on your mind's eye
-          instead (or try reloading).
-        </div>
-      );
+      this.respondToError();
     }
+  }
+
+  // Respond to any error by swapping out the real image with a placeholder.
+  respondToError() {
+    this.svg = (
+      <div>
+        Something went wrong with the image here. Rely on your mind's eye
+        instead (or try reloading).
+      </div>
+    );
+
+    // Show the error immediately so it is apparent when the problem occurred.
+    this.forceUpdate();
   }
 
   // Apply changes to the DOM.
