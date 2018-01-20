@@ -24,9 +24,9 @@ what the resistance spec is for a resistor with 4 bands.
 2. Install types if you'll be consulting flow: `flow-typed install`.  
    (you'll need to `yarn global add flow-typed` if you don't already have it.).
 3. Start any runners of interest. Run these from the project root.
- - Dev server: `yarn start`
- - Test runner: `yarn test`
- - Type checker: `yarn flow-watch`
+    - Dev server: `yarn start`
+    - Test runner: `yarn test`
+    - Type checker: `yarn flow-watch`
 
 ### How this project was made
 
