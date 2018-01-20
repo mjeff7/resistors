@@ -1,3 +1,7 @@
+/*
+ * Top level element holding the image and selectors.
+ */
+
 .imageAndSelectors {
   display: flex;
   height: 100%;
