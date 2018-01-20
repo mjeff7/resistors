@@ -8,9 +8,18 @@ type Value = string;
 
 type Setters = Array<[Selector, Value]>;
 
-type Props = {
+type PassedOnProps = {
+  path: string,
+  className?: string,
+  wrapperClassName?: string,
+  callback?: (HTMLElement | string) => mixed
+};
+
+type OwnProps = {
   set?: Setters
 };
+
+type Props = OwnProps & PassedOnProps;
 
 export default class extends React.Component<Props & *, *> {
   // Store the SVG component so that it is never updated by React.
