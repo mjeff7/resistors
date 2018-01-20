@@ -1,5 +1,14 @@
 // @flow
 
+/*
+ * bandSelectors
+ *
+ * Provides the selectors for each color band on a resistor. Each is typed
+ * according to the values allowed for a given band and wraps a presentation
+ * component for the interface.
+ *
+ */
+
 import { withProps } from "recompose";
 import * as React from "react";
 
@@ -15,6 +24,11 @@ import {
 } from "../calculator/colors";
 import Select from "./Select";
 
+/*
+ * Styling.
+ */
+
+// Background display color for each color.
 const MENU_BACKGROUND_COLORS = {
   none: "white",
   pink: "pink",
@@ -32,6 +46,7 @@ const MENU_BACKGROUND_COLORS = {
   white: "white"
 };
 
+// Text display color for each color.
 const MENU_TEXT_COLORS = {
   none: "black",
   pink: "black",
@@ -49,6 +64,7 @@ const MENU_TEXT_COLORS = {
   white: "black"
 };
 
+// A style object that combines the above styling options to be given to React.
 const MENU_STYLES = Object.assign(
   {},
   ...Object.keys(MENU_BACKGROUND_COLORS).map(color => ({
@@ -59,8 +75,19 @@ const MENU_STYLES = Object.assign(
   }))
 );
 
+/*
+ * *BandSelector components.
+ *
+ * They each take two props specifying the chosen value to display and a
+ * callback when a new value is chosen. Each band selector provides the allowed
+ * colors for that band and the props are typed against those colors.
+ */
+
 type BandSelectorProps<T> = {
+  // Callback that will be triggered when the user selects an option.
   onSelectValue: T => void,
+
+  // The value to display currently.
   value: T
 };
 
