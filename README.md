@@ -16,6 +16,16 @@ about it [here](https://en.wikipedia.org/wiki/Electronic_color_code).
 Match the colors of the resistor with the menus here like in the picture to see
 what the resistance spec is for a resistor with 4 bands.
 
+### Exploring the code
+
+1. Clone the repo.
+2. Install types if you'll be consulting flow: `flow-typed install`.  
+   (you'll need to `yarn global add flow-typed` if you don't already have it.).
+3. Start any runners of interest. Run these from the project root.
+ - Dev server: `yarn start`
+ - Test runner: `yarn test`
+ - Type checker: `yarn flow-watch`
+
 ### How this project was made
 
 This project is built in Javascript using React to manage the interface. Flow
