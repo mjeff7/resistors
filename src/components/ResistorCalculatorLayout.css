@@ -10,6 +10,16 @@
 }
 
 /*
+ * Calculations display
+ */
+
+.calculatedResistanceDisplay {
+  background: lightgrey;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+/*
  * Resistor image
  */
 
