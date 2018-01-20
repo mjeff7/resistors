@@ -1,21 +1,71 @@
 .imageAndSelectors {
   display: flex;
   height: 100%;
+
+  border-radius: 1rem;
+  border: 1px solid lightgrey;
+  padding: 1rem 2rem;
 }
+
+/*
+ * Calculations display
+ */
+
+.calculatedResistanceDisplay {
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  margin: 1rem;
+  padding: 0.5rem;
+
+  border-radius: 1rem;
+  border: 1px solid lightgrey;
+}
+
+.calculatedResistanceDisplay > div {
+  margin: 0.5rem;
+}
+
+.caption {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid black;
+}
+
+/*
+ * Resistor image
+ */
+
+/* Make the resistor image respond to size of surroundings. It needs height or
+ * width explicitly set on the parent in absolute terms, or an unbroken chain
+ * of parents each setting those properties as percentages until the final
+ * parent sets it in concrete terms. */
+.resistorImageWrapper, .resistorImageWrapper > div {
+  height: 100%;
+  width: 100%;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+
+/*
+ * Selectors menus
+ */
 
 .selectors {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  padding-left: 1rem;
 }
 
-.selectors > * {
-}
-
-object {
-  height: 100%;
-}
-
-svg {
-  width: 50%;
+.selectors > select {
+  font-size: 2rem;
+  font-family: 'Maven Pro', sans-serif;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-variant: small-caps;
 }

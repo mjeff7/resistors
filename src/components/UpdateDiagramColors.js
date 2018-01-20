@@ -46,7 +46,14 @@ export default class extends React.Component<Props & *, *> {
       this.svg = (
         <ReactSVG
           callback={this.saveElement}
-          {...{ path, className, wrapperClassName, style }}
+          {...{
+            path,
+            className,
+            wrapperClassName: `injected-svg-wrapper${
+              wrapperClassName ? ` ${wrapperClassName}` : ""
+            }`,
+            style
+          }}
         />
       );
     } else {

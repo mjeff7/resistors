@@ -71,6 +71,15 @@ export default ({
   setBandDColor
 }: Props) => (
   <div>
+    <div className="calculatedResistanceDisplay">
+      <div>
+        {resistance} {tolerance}
+      </div>
+      <div>
+        {minimum} to {maximum}
+      </div>
+      <div className="caption">Resistor spec with these colors</div>
+    </div>
     <div className="imageAndSelectors">
       <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
       <Spacer className="selectors" padTo={100} spacing={[29.5, 8.5, 8, 19]}>
@@ -85,12 +94,6 @@ export default ({
           onSelectValue={setBandDColor}
         />
       </Spacer>
-    </div>
-    <div>
-      Resistance value: {resistance} {tolerance}
-    </div>
-    <div>
-      Range: {minimum} to {maximum}
     </div>
   </div>
 );

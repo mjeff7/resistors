@@ -22,5 +22,7 @@ export default (props: BandColors) => (
   <UpdateDiagramColors
     path={resistorImageData}
     set={getTargetsToAdjust(props)}
+    className="resistorImage"
+    wrapperClassName="resistorImageWrapper"
   />
 );
