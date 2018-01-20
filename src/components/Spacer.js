@@ -4,12 +4,6 @@ import * as React from "react";
 
 import { interleave } from "../utils";
 
-type SpacerProps = {
-  children: Array<React.Node>,
-  padTo?: number,
-  spacing: Array<number>
-};
-
 const add = (a, b) => a + b;
 const sum = (arr: Array<*>) => arr.reduce(add, 0);
 
@@ -19,12 +13,18 @@ const addPadding = (spacing: Array<*>, padTo: number) => {
   return spacingSum > padTo ? spacing : spacing.concat(padTo - spacingSum);
 };
 
-const Spacer = ({
+type Props = {
+  children: Array<React.Node>,
+  padTo?: number,
+  spacing: Array<number>
+};
+
+export default ({
   children,
   padTo,
   spacing = [],
   ...remainingProps
-}: SpacerProps) => {
+}: Props) => {
   const actualSpacing = padTo ? addPadding(spacing, padTo) : spacing;
   const spacers = actualSpacing.map((spacerSize, spacerIndex) => (
     <div key={spacerIndex} style={{ flexGrow: spacerSize }} />
@@ -34,5 +34,3 @@ const Spacer = ({
 
   return <div {...remainingProps}>{newChildren}</div>;
 };
-
-export default Spacer;
