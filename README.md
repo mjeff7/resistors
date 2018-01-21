@@ -4,6 +4,8 @@ Resistors follow a color scheme to indicate how much resistance they provide.
 How much resistance comes in a resistor? Enter their color bands here and find
 out.
 
+[Try it](https://mjeff7.github.io/resistors/) now.
+
 ### How to use
 
 Color coded resistors typically have between 4 and 6 bands, each representing a
@@ -22,9 +24,9 @@ what the resistance spec is for a resistor with 4 bands.
 2. Install types if you'll be consulting flow: `flow-typed install`.  
    (you'll need to `yarn global add flow-typed` if you don't already have it.).
 3. Start any runners of interest. Run these from the project root.
- - Dev server: `yarn start`
- - Test runner: `yarn test`
- - Type checker: `yarn flow-watch`
+    - Dev server: `yarn start`
+    - Test runner: `yarn test`
+    - Type checker: `yarn flow-watch`
 
 ### How this project was made
 
