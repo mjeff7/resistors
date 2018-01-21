@@ -13,6 +13,7 @@ import React from "react";
 import type { BandColors } from "./ResistorCalculator";
 import UpdateDiagramColors from "./UpdateDiagramColors";
 import resistorImageData from "../assets/resistor.svg";
+import COLOR_REPRESENTATIVES from "../colorRepresentatives";
 
 const getTargetsToAdjust = ({
   bandAColor,
@@ -20,10 +21,13 @@ const getTargetsToAdjust = ({
   bandCColor,
   bandDColor
 }) => [
-  ["#bandA", bandAColor],
-  ["#bandB", bandBColor],
-  ["#bandC", bandCColor],
-  ["#bandD", bandDColor === "none" ? "#0000" : bandDColor]
+  ["#bandA", COLOR_REPRESENTATIVES[bandAColor]],
+  ["#bandB", COLOR_REPRESENTATIVES[bandBColor]],
+  ["#bandC", COLOR_REPRESENTATIVES[bandCColor]],
+  [
+    "#bandD",
+    bandDColor === "none" ? "#0000" : COLOR_REPRESENTATIVES[bandDColor]
+  ]
 ];
 
 export default (props: BandColors) => (
