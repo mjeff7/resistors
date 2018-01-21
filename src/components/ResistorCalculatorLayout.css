@@ -81,6 +81,12 @@ svg {
   min-width: 4em;
 }
 
-#bandA, #bandB, #bandC, #bandD, select {
+.selectors > select:focus {
+  transition: 0.5s, box-shadow 0.1s;
+  box-shadow: 0 0 11px 4px #d9bb7a;
+  outline: none;
+}
+
+#bandA, #bandB, #bandC, #bandD {
   transition: 0.5s;
 }
