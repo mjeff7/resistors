@@ -7,9 +7,9 @@
 /* General frame of the page */
 
 #root {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   text-align: center;
-  border-bottom: 1px solid black;
   padding: 2rem;
 };
 
