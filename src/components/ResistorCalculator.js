@@ -103,7 +103,12 @@ export const attachStateHandlers = compose(
 export const formatResistanceValue = (value: number, sigFigs: ?number) => {
   const [smallValue, suffix] = abbreviateValue(value);
 
-  return `${sigFigs ? smallValue.toPrecision(sigFigs) : smallValue} ${suffix}Ω`;
+  // Chop off any rounding errors that result in long decimal runs.
+  const clippedValue = Math.round(smallValue * 1e8) / 1e8;
+
+  return `${
+    sigFigs ? clippedValue.toPrecision(sigFigs) : clippedValue
+  } ${suffix}Ω`;
 };
 
 export const formatTolerance = (value: ToleranceValue) => `± ${value * 100}%`;

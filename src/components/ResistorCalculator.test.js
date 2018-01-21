@@ -234,4 +234,27 @@ describe("number formatting", () => {
       checkValue(toleranceValueFromColor(color))
     );
   });
+
+  describe("values are guarded from rounding errors", () => {
+    const checkValue = value => {
+      it(`${value}`, () => {
+        expect(formatResistanceValue(value).length).toBeLessThan(6);
+      });
+    };
+
+    checkValue(10 * 1.2 * Math.pow(10, -1));
+
+    const test = (a, b, e) =>
+      checkValue(Math.pow(10, e) * (10 * a + b) * Math.pow(10, -e));
+
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(a =>
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(b =>
+        [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(e => test(a, b, e))
+      )
+    );
+
+    // Found failing cases, from .999... errors.
+    test(2, 9, -2);
+    test(5, 8, -2);
+  });
 });
