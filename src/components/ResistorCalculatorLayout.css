@@ -82,5 +82,5 @@ svg {
 }
 
 #bandA, #bandB, #bandC, #bandD, select {
-  transition: 1s;
+  transition: 0.5s;
 }
