@@ -22,6 +22,7 @@ import {
   TOLERANCE_COLORS,
   type ToleranceColor
 } from "../calculator/colors";
+import COLOR_REPRESENTATIVES from "../colorRepresentatives";
 import Select from "./Select";
 
 /*
@@ -29,22 +30,7 @@ import Select from "./Select";
  */
 
 // Background display color for each color.
-const MENU_BACKGROUND_COLORS = {
-  none: "white",
-  pink: "pink",
-  silver: "silver",
-  gold: "gold",
-  black: "black",
-  brown: "brown",
-  red: "red",
-  orange: "orange",
-  yellow: "yellow",
-  green: "green",
-  blue: "blue",
-  violet: "violet",
-  grey: "grey",
-  white: "white"
-};
+const MENU_BACKGROUND_COLORS = COLOR_REPRESENTATIVES;
 
 // Text display color for each color.
 const MENU_TEXT_COLORS = {
