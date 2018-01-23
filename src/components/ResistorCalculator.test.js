@@ -5,13 +5,23 @@ import React from "react";
 import { mount } from "enzyme";
 
 import {
+  FIRST_DIGIT_COLORS,
+  MULTIPLIER_COLORS,
+  SECOND_DIGIT_COLORS,
+  TOLERANCE_COLORS
+} from "../calculator/colors";
+import {
   FirstBandSelector,
   MultiplierBandSelector,
   SecondBandSelector,
   ToleranceBandSelector
 } from "./bandSelectors";
-import { TOLERANCE_COLORS } from "../calculator/colors";
-import { toleranceValueFromColor } from "../calculator/values";
+import {
+  firstDigitFromColor,
+  multiplierExponentFromColor,
+  secondDigitFromColor,
+  toleranceValueFromColor
+} from "../calculator/values";
 import ResistorCalculator, {
   attachStateHandlers,
   formatResistanceValue,
@@ -244,17 +254,23 @@ describe("number formatting", () => {
 
     checkValue(10 * 1.2 * Math.pow(10, -1));
 
-    const test = (a, b, e) =>
-      checkValue(Math.pow(10, e) * (10 * a + b) * Math.pow(10, -e));
+    const checkColorValueCombination = (firstDigit, secondDigit, multiplier) =>
+      checkValue(
+        Math.pow(10, multiplier) *
+          (10 * firstDigit + secondDigit) *
+          Math.pow(10, -multiplier)
+      );
 
-    [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(a =>
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(b =>
-        [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(e => test(a, b, e))
+    FIRST_DIGIT_COLORS.forEach(bandAColor =>
+      SECOND_DIGIT_COLORS.forEach(bandBColor =>
+        MULTIPLIER_COLORS.forEach(bandCColor =>
+          checkColorValueCombination(
+            firstDigitFromColor(bandAColor),
+            secondDigitFromColor(bandBColor),
+            multiplierExponentFromColor(bandCColor)
+          )
+        )
       )
     );
-
-    // Found failing cases, from .999... errors.
-    test(2, 9, -2);
-    test(5, 8, -2);
   });
 });
