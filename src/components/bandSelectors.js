@@ -13,6 +13,7 @@ import { withProps } from "recompose";
 import * as React from "react";
 
 import {
+  Colors,
   FIRST_DIGIT_COLORS,
   type FirstDigitColor,
   MULTIPLIER_COLORS,
@@ -34,20 +35,20 @@ const MENU_BACKGROUND_COLORS = COLOR_REPRESENTATIVES;
 
 // Text display color for each color.
 const MENU_TEXT_COLORS = {
-  none: "black",
-  pink: "black",
-  silver: "black",
-  gold: "black",
-  black: "white",
-  brown: "white",
-  red: "black",
-  orange: "black",
-  yellow: "black",
-  green: "white",
-  blue: "white",
-  violet: "black",
-  grey: "white",
-  white: "black"
+  [Colors.NONE]: "black",
+  [Colors.PINK]: "black",
+  [Colors.SILVER]: "black",
+  [Colors.GOLD]: "black",
+  [Colors.BLACK]: "white",
+  [Colors.BROWN]: "white",
+  [Colors.RED]: "black",
+  [Colors.ORANGE]: "black",
+  [Colors.YELLOW]: "black",
+  [Colors.GREEN]: "white",
+  [Colors.BLUE]: "white",
+  [Colors.VIOLET]: "black",
+  [Colors.GREY]: "white",
+  [Colors.WHITE]: "black"
 };
 
 // A style object that combines the above styling options to be given to React.
