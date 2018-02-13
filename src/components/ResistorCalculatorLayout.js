@@ -58,7 +58,7 @@ export default ({
     </div>
     <div className="imageAndSelectors">
       <ResistorImage {...{ bandAColor, bandBColor, bandCColor, bandDColor }} />
-      <Spacer className="selectors" padTo={100} spacing={[29.5, 8.5, 8, 19]}>
+      <Spacer className="selectors" padTo={100} spacing={[34, 4, 4, 18]}>
         <FirstBandSelector value={bandAColor} onSelectValue={setBandAColor} />
         <SecondBandSelector value={bandBColor} onSelectValue={setBandBColor} />
         <MultiplierBandSelector
