@@ -11,7 +11,7 @@
  *      Colors.BLUE,
  *      Colors.BLACK,
  *      Colors.NONE
- *    ) === { resistance: 26, tolerance: 0.2 };
+ *    ) => { resistance: 26, tolerance: 0.2 };
  *
  * This is separated into distinct stages:
  *   1) Translate colors into numerical values (mostly handled by colors.js).
